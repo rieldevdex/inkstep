@@ -1,0 +1,45 @@
+/* Base: reset, page ground, layout primitives. Tokens only. */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: var(--space-9); }
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  line-height: var(--leading-body);
+  overflow-x: hidden;
+}
+h1, h2, h3, p, dl, dd, ol, ul { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+h1, h2, h3 { text-wrap: balance; line-height: var(--leading-snug); }
+a { color: inherit; }
+img, svg { max-width: 100%; }
+:focus-visible { outline: var(--rule-ink) solid var(--color-dot); outline-offset: var(--space-1); border-radius: var(--radius-sm); }
+[hidden] { display: none !important; }
+
+.container { max-width: var(--max-w); margin-inline: auto; padding-inline: var(--gutter); }
+.band { padding-block: clamp(var(--space-8), 9vw, var(--space-10)); border-bottom: var(--rule-hair) solid var(--color-line); }
+.band--inverse { background: var(--color-inverse-bg); color: var(--color-inverse-fg); border-bottom-color: var(--color-inverse-line); }
+.band--inverse .label { color: var(--color-inverse-2); }
+.section-head { display: grid; gap: var(--space-4); margin-bottom: var(--space-7); max-width: var(--measure); }
+.section-title { font-size: var(--text-2xl); font-weight: var(--weight-black); letter-spacing: var(--tracking-tight); line-height: var(--leading-snug); }
+
+.skip {
+  position: absolute; left: var(--space-4); top: var(--space-4); z-index: var(--z-cursor);
+  transform: translateY(-300%); background: var(--color-ink); color: var(--color-paper);
+  padding: var(--space-3) var(--space-5); border-radius: var(--radius-pill); text-decoration: none;
+}
+.skip:focus { transform: none; }
+
+@keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(var(--space-4)); } to { opacity: 1; transform: none; } }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes drop { from { transform: translateY(-1.2em) scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes slide { to { transform: translateX(-50%); } }
+@keyframes pulse { 50% { opacity: .35; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
