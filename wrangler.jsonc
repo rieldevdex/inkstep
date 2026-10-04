@@ -1,0 +1,11 @@
+// Cloudflare Workers configuration. The whole repository is the website; there is no build step.
+// .assetsignore keeps the README and this file off the live site.
+{
+  "name": "inkstep",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": ".",
+    // / serves index.html
+    "html_handling": "auto-trailing-slash"
+  }
+}

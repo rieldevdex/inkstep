@@ -13,7 +13,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,700;0,800;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,700;0,800;1,400&family=JetBrains+Mono:wght@500&family=Atkinson+Hyperlegible+Next:wght@400;700&family=Fraunces:opsz,wght@9..144,600&family=Kalam:wght@700&display=swap">
 <style>
 /* Layout: one paper sheet; hero with live ink canvas, then a staircase of sections that climbs toward the orange dot. */
 :root{
@@ -198,6 +198,101 @@ footer p{color:var(--muted); font-size:14px}
 @media (max-width:520px){.otto-card{grid-template-columns:72px 1fr}.otto{width:72px;height:80px}}
 </style>
 <style>html{-webkit-text-size-adjust:100%} body{margin:0} img{max-width:100%}</style>
+
+<style>
+/* ---------- facts: when they were counted ---------- */
+.facts-note{margin-top:12px; font-size:13px; color:var(--muted)}
+
+/* ---------- Eighthundred preview ----------
+   Eighthundred's own tokens, fonts and components, copied from eighthundred.site and scoped to .eh-preview
+   so they never touch the rest of this page. Light and dark follow this page's theme. */
+.eh-preview{
+  --paper:#F5EFE3; --paper-grid:#E9E0CE; --paper-dot:rgba(120,90,40,.07); --surface:#FFFCF5; --surface-2:#F1E9DA;
+  --ink:#221D17; --ink-2:#5E564B; --rule:#E3D8C4; --rule-strong:#8C8070;
+  --pen:#A63D22; --on-pen:#FFFFFF; --red:#A8301F; --red-soft:#F8E3DA; --green:#2F6B42; --green-soft:#E7F0E2;
+  --hl:#F2D46A; --on-hl:#221D17; --otto:#A9500F; --otto-soft:#FBE7D3;
+  --sh-1:0 1px 0 rgba(60,40,10,.04),0 8px 24px -14px rgba(60,40,10,.25);
+  --sh-2:0 2px 0 rgba(60,40,10,.05),0 18px 40px -22px rgba(60,40,10,.45);
+  --eh-display:"Fraunces","Iowan Old Style",Georgia,serif;
+  --eh-text:"Atkinson Hyperlegible Next","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --eh-hand:"Kalam","Segoe Print","Bradley Hand",cursive;
+  --eh-math:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;
+  margin:clamp(40px,6vw,64px) 0 0; border:1.5px solid var(--ink); border-radius:16px; overflow:hidden;
+  background:var(--paper); color:var(--ink); font-family:var(--eh-text); font-size:16px; line-height:1.55; box-shadow:var(--sh-2)
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .eh-preview{
+  --paper:#1C1915; --paper-grid:#26221C; --paper-dot:rgba(255,235,200,.035); --surface:#24201A; --surface-2:#2C271F;
+  --ink:#F0E8DA; --ink-2:#BDB2A1; --rule:#3A3329; --rule-strong:#7E7363;
+  --pen:#E8896C; --on-pen:#1C1915; --red:#F0907A; --red-soft:#3A221C; --green:#8CC49A; --green-soft:#1F2F22;
+  --hl:#E2C15A; --on-hl:#1C1915; --otto:#F0A35E; --otto-soft:#3A2816;
+  --sh-1:0 1px 0 rgba(0,0,0,.25),0 8px 22px -14px rgba(0,0,0,.7); --sh-2:0 2px 0 rgba(0,0,0,.3),0 20px 44px -22px rgba(0,0,0,.8)}}
+:root[data-theme="dark"] .eh-preview{
+  --paper:#1C1915; --paper-grid:#26221C; --paper-dot:rgba(255,235,200,.035); --surface:#24201A; --surface-2:#2C271F;
+  --ink:#F0E8DA; --ink-2:#BDB2A1; --rule:#3A3329; --rule-strong:#7E7363;
+  --pen:#E8896C; --on-pen:#1C1915; --red:#F0907A; --red-soft:#3A221C; --green:#8CC49A; --green-soft:#1F2F22;
+  --hl:#E2C15A; --on-hl:#1C1915; --otto:#F0A35E; --otto-soft:#3A2816;
+  --sh-1:0 1px 0 rgba(0,0,0,.25),0 8px 22px -14px rgba(0,0,0,.7); --sh-2:0 2px 0 rgba(0,0,0,.3),0 20px 44px -22px rgba(0,0,0,.8)}
+.ehp-bar{display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--surface-2); border-bottom:1.5px solid var(--rule)}
+.ehp-dots{display:flex; gap:6px; flex:none}
+.ehp-dots i{width:10px; height:10px; border-radius:50%; background:var(--rule-strong); opacity:.55}
+.ehp-url{flex:1; min-width:0; padding:3px 12px; border-radius:999px; background:var(--surface); color:var(--ink-2); font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.ehp-flag{flex:none; padding:3px 10px; border-radius:999px; background:var(--hl); color:var(--on-hl); font-size:12.5px; font-weight:700}
+.ehp-page{display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:clamp(20px,4vw,40px); align-items:center; padding:clamp(18px,4vw,40px);
+  background-color:var(--paper); background-image:radial-gradient(var(--paper-dot) 1px,transparent 1px); background-size:5px 5px}
+.ehp-kicker{display:block; margin:0 0 4px; font-family:var(--eh-hand); font-weight:700; font-size:20px; line-height:1.2; color:var(--pen)}
+.ehp-h{margin:0 0 12px; font-family:var(--eh-display); font-weight:600; font-size:clamp(30px,4vw,44px); line-height:1.08; letter-spacing:-.015em}
+.ehp-lede{margin:0 0 18px; max-width:44ch; font-size:17px; line-height:1.55; color:var(--ink-2)}
+.ehp-btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; padding:9px 18px; border-radius:12px; border:1.5px solid var(--rule-strong);
+  background:var(--surface); color:var(--ink); font:700 15px/1.2 var(--eh-text); text-decoration:none; cursor:pointer; transition:background-color .12s, border-color .12s}
+.ehp-btn:hover{border-color:var(--ink)}
+.ehp-btn.pri{background:var(--ink); border-color:var(--ink); color:var(--paper)}
+.ehp-btn.pri:hover{background:var(--pen); border-color:var(--pen); color:var(--on-pen)}
+.ehp-sr{position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+.eh-preview .nw{white-space:nowrap}
+.eh-preview i{font-family:var(--eh-math); font-size:1.08em}
+.eh-preview .sheet-paper{background-color:var(--surface); background-image:linear-gradient(var(--paper-grid) 1px,transparent 1px),linear-gradient(90deg,var(--paper-grid) 1px,transparent 1px); background-size:18px 18px}
+.eh-preview .qsheet{position:relative; padding:18px 18px 16px; border:1.5px solid var(--ink); border-radius:16px; box-shadow:var(--sh-2)}
+.eh-preview .qlabel{display:flex; justify-content:space-between; gap:10px; margin:0 0 6px; font-size:13px; font-weight:700; color:var(--ink-2)}
+.eh-preview .qtext{margin:0 0 4px; font-size:19px; line-height:1.45}
+.eh-preview .choice-list{display:flex; flex-direction:column; gap:8px; margin:12px 0 0}
+.eh-preview .choice-btn{position:relative; display:flex; align-items:center; gap:14px; width:100%; min-height:48px; padding:10px 14px; text-align:left;
+  background:var(--surface); color:var(--ink); border:1.5px solid var(--rule-strong); border-radius:12px; font:inherit; font-size:17px; cursor:pointer; transition:border-color .12s, background-color .12s}
+.eh-preview .choice-btn:hover{border-color:var(--ink)}
+.eh-preview .choice-btn .L{flex:none; display:grid; place-items:center; width:28px; height:28px; border-radius:50%; border:1.5px solid var(--ink); font-size:13px; font-weight:700}
+.eh-preview .choice-btn[disabled]{cursor:default}
+.eh-preview .choice-btn[disabled]:not(.right):not(.wrong){opacity:.6}
+.eh-preview .choice-btn.right{border-color:var(--green); background:var(--green-soft)}
+.eh-preview .choice-btn.right .L{background:var(--green); border-color:var(--green); color:var(--surface)}
+.eh-preview .choice-btn.wrong{border-color:var(--red); background:var(--red-soft)}
+.eh-preview .choice-btn.wrong .L{border-color:var(--red); color:var(--red)}
+.eh-preview .choice-btn.wrong .L+span{text-decoration:line-through; text-decoration-color:var(--red); text-decoration-thickness:2px}
+.eh-preview .feedback{margin-top:12px; padding:12px 14px; border-radius:12px; border:1.5px solid transparent; font-size:16px}
+.eh-preview .feedback.good{background:var(--green-soft); border-color:color-mix(in srgb,var(--green) 40%,transparent)}
+.eh-preview .feedback.bad{background:var(--red-soft); border-color:color-mix(in srgb,var(--red) 40%,transparent)}
+.eh-preview .feedback .lbl{margin-right:6px; font-weight:700}
+.eh-preview .feedback.good .lbl{color:var(--green)} .eh-preview .feedback.bad .lbl{color:var(--red)}
+.eh-preview .otto-row{display:flex; gap:12px; align-items:flex-end; margin-top:14px}
+.eh-preview .otto-av{flex:none; width:52px; height:58px}
+.eh-preview .otto-av .otto{width:100%; height:100%}
+.eh-preview .otto-say{position:relative; max-width:46ch; padding:10px 14px; border-radius:16px 16px 16px 4px; background:var(--surface); border:1.5px solid var(--otto); font-size:15px; line-height:1.45; box-shadow:var(--sh-1)}
+.eh-preview .otto-say .who{display:flex; align-items:center; gap:6px; margin-bottom:2px; font-size:13px; font-weight:700; color:var(--otto)}
+.eh-preview .tag.ai{display:inline-flex; align-items:center; padding:2px 9px; border-radius:999px; background:var(--otto-soft); color:var(--otto); font-size:13px; font-weight:700; line-height:1.5}
+.eh-preview .reason{min-width:0; margin:12px 0 0; padding:14px 16px; border-radius:12px; border:1.5px dashed var(--rule-strong); background:var(--surface)}
+.eh-preview .reason legend{padding:0 4px; font-size:15px; font-weight:700}
+.eh-preview .reason .opts{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
+.eh-preview .reason button{min-height:44px; padding:8px 14px; border-radius:12px; border:1.5px solid var(--rule-strong); background:var(--surface); color:var(--ink); font:inherit; font-size:15px; font-weight:700; text-align:left; cursor:pointer}
+.eh-preview .reason button small{display:block; font-size:13px; font-weight:400; color:var(--ink-2)}
+.eh-preview .reason button[aria-pressed="true"]{background:var(--hl); border-color:var(--ink); color:var(--on-hl)}
+.eh-preview .reason button[aria-pressed="true"] small{color:var(--on-hl)}
+.eh-preview .after{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+.eh-preview .after:empty{display:none}
+.eh-preview a:focus-visible,.eh-preview button:focus-visible{outline:3px solid var(--pen); outline-offset:2px; border-radius:12px}
+.ehp-cap{padding:12px clamp(16px,3vw,24px); border-top:1.5px solid var(--rule); background:var(--surface); color:var(--ink-2); font-size:14px}
+.ehp-cap strong{color:var(--ink)}
+.ehp-cap a{color:var(--pen); font-weight:700}
+@media (max-width:820px){ .ehp-page{grid-template-columns:1fr} }
+@media (max-width:420px){ .ehp-url{display:none} .ehp-bar{justify-content:space-between} }
+</style>
 </head>
 <body>
 <nav class="nav" aria-label="Main">
@@ -263,24 +358,56 @@ footer p{color:var(--muted); font-size:14px}
       </div>
       <div class="product">
         <div class="intro">
-          <span class="status"><span class="dot"></span>Alpha · live now</span>
+          <span class="status"><span class="dot"></span>Beta · live now</span>
           <h3>Eighthundred</h3>
-          <p>A free SAT Math platform named after the perfect score. It teaches step by step, then diagnoses why you got a question wrong and plans practice around it.</p>
-          <p>This year the club will grow its original question bank, roll out Otto, the AI tutor, to every student with safety rules for under-18 users, test it with students at school, and prepare a public beta.</p>
+          <p>A free SAT Math platform named after the perfect score. It teaches step by step, asks what went wrong after every miss, files the question in a Mistake Notebook, and brings it back until you solve it on your own.</p>
+          <p>Eighthundred is now in public beta (version 0.10, October 2026). This year the club will grow its original question bank, roll out Otto, the AI tutor, to every student with safety rules for under-18 users, and test it with students at school.</p>
           <div class="otto-card">
             <svg class="otto" viewBox="0 0 120 132" role="img" aria-label="Otto, Eighthundred’s mascot"><g class="o-arm-l"><path class="o-line" d="M36 92 Q24 92 17 83"/></g><g class="o-arm-r"><path class="o-line" d="M84 92 Q96 92 103 83"/></g><g class="o-body"><ellipse class="o-shape" cx="60" cy="97" rx="28" ry="24"/><ellipse class="o-shape" cx="60" cy="52" rx="23" ry="21"/><ellipse class="o-cheek" cx="44" cy="58" rx="4.2" ry="2.6"/><ellipse class="o-cheek" cx="76" cy="58" rx="4.2" ry="2.6"/><g class="o-eyes"><ellipse class="o-eye" cx="52" cy="50" rx="3.4" ry="4.4"/><ellipse class="o-eye" cx="68" cy="50" rx="3.4" ry="4.4"/><circle class="o-shine" cx="53.2" cy="48.4" r="1.2"/><circle class="o-shine" cx="69.2" cy="48.4" r="1.2"/></g><path class="o-mouth" d="M55 59 Q60 63.5 65 59"/></g><circle class="o-dot" cx="60" cy="17" r="6.5"/></svg>
-            <div><h4>Meet Otto <small>New · alpha</small></h4><p>Eighthundred’s AI tutor sits beside every question. He sees what you answered, gives hints before answers, names the kind of mistake you made, and can set up a similar question in one tap — in English or Vietnamese.</p></div>
+            <div><h4>Meet Otto <small>Beta</small></h4><p>Eighthundred’s AI tutor sits beside every question. He already sees the question, your answer, how sure you were and the worked solution, gives hints before answers, names the Reason behind a mistake and its fix, and replies in English or Vietnamese. Free with a daily message limit; he needs a free account.</p></div>
           </div>
           <a class="btn ghost" href="https://eighthundred.site" target="_blank" rel="noopener">eighthundred.site</a>
         </div>
+        <div class="facts-wrap">
         <ul class="facts">
-          <li><span class="n">24</span><span class="t">lessons across 8 units, covering all four SAT Math areas, each with an interactive lab and step-by-step solutions</span></li>
-          <li><span class="n">266</span><span class="t">written questions, plus 72 generators that create new questions without limit</span></li>
-          <li><span class="n">22</span><span class="t">questions in Real Practice, a two-module Digital SAT-style test in 35 minutes where module 2 adapts to how you did in module 1</span></li>
-          <li><span class="n">3</span><span class="t">mistake types Eighthundred tells apart: a slip, a concept gap, or not recognising the question type</span></li>
-          <li><span class="n">30</span><span class="t">free messages a day with Otto, the AI tutor, for every signed-in student</span></li>
+          <li><span class="n">24</span><span class="t">lessons in 8 units, covering all four SAT Math areas, each with an interactive lab and a step-by-step walkthrough</span></li>
+          <li><span class="n">314</span><span class="t">questions with full worked solutions, plus 72 generators that make new-number versions of each skill</span></li>
+          <li><span class="n">44</span><span class="t">questions in a Real Practice test: a full math section in the Digital SAT's format, two modules of 22 questions and 35 minutes each, where module 2 adapts to how you did in module 1</span></li>
+          <li><span class="n">3</span><span class="t">Reasons Eighthundred asks about after every miss: a slip, an idea you didn't know yet, or an idea you didn't recognise. Each one gets its own fix</span></li>
+          <li><span class="n">0</span><span class="t">ads, paywalls or paid plans. Running costs are covered by donations, and every donation and expense is listed publicly</span></li>
         </ul>
+        <p class="facts-note">Counted on eighthundred.site on 3 October 2026.</p>
+        </div>
       </div>
+      <figure class="eh-preview" id="ehPreview" aria-label="Preview of Eighthundred">
+        <div class="ehp-bar">
+          <span class="ehp-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="ehp-url">eighthundred.site</span>
+          <strong class="ehp-flag">This is a preview</strong>
+        </div>
+        <div class="ehp-page">
+          <div class="ehp-copy">
+            <span class="ehp-kicker">free SAT Math · no ads</span>
+            <p class="ehp-h">Find out why you missed it.</p>
+            <p class="ehp-lede">Eighthundred asks what went wrong after every miss, files the question in your Mistake Notebook, and brings it back until you solve it on your own.</p>
+            <a class="ehp-btn pri" href="https://eighthundred.site" target="_blank" rel="noopener">Start free <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="qsheet sheet-paper" role="group" aria-labelledby="ehpQ" aria-describedby="ehpHow">
+            <p class="qlabel"><span>Try one. It takes 5 seconds.</span><span>Lesson 1 · Easy</span></p>
+            <p class="qtext" id="ehpQ">If <span class="nw">4<i>x</i> − 7 = 21</span>, what is the value of <span class="nw"><i>x</i> − 2</span>?</p>
+            <p class="ehp-sr" id="ehpHow">Choose an answer. Feedback appears below the choices.</p>
+            <div class="choice-list" id="ehpChoices"><button type="button" class="choice-btn" data-k="0"><span class="L">A</span><span>1.5</span></button><button type="button" class="choice-btn" data-k="1"><span class="L">B</span><span>5</span></button><button type="button" class="choice-btn" data-k="2"><span class="L">C</span><span>7</span></button><button type="button" class="choice-btn" data-k="3"><span class="L">D</span><span>9</span></button></div>
+            <div id="ehpRes" role="status" aria-live="polite"></div>
+            <div class="otto-row">
+              <span class="otto-av"><svg class="otto" viewBox="0 0 120 132" aria-hidden="true" focusable="false"><g class="o-arm-l"><path class="o-line" d="M36 92 Q24 92 17 83"/></g><g class="o-arm-r"><path class="o-line" d="M84 92 Q96 92 103 83"/></g><g class="o-body"><ellipse class="o-shape" cx="60" cy="97" rx="28" ry="24"/><ellipse class="o-shape" cx="60" cy="52" rx="23" ry="21"/><ellipse class="o-cheek" cx="44" cy="58" rx="4.2" ry="2.6"/><ellipse class="o-cheek" cx="76" cy="58" rx="4.2" ry="2.6"/><g class="o-eyes"><ellipse class="o-eye" cx="52" cy="50" rx="3.4" ry="4.4"/><ellipse class="o-eye" cx="68" cy="50" rx="3.4" ry="4.4"/><circle class="o-shine" cx="53.2" cy="48.4" r="1.2"/><circle class="o-shine" cx="69.2" cy="48.4" r="1.2"/></g><path class="o-mouth" d="M55 59 Q60 63.5 65 59"/></g><circle class="o-dot" cx="60" cy="17" r="6.5"/></svg></span>
+              <div class="otto-say" aria-live="polite"><span class="who">Otto <span class="tag ai">AI tutor</span></span><span class="say">Pick an answer. I'll tell you what happened.</span></div>
+            </div>
+            <div id="ehpReason"></div>
+            <div class="after" id="ehpAfter"></div>
+          </div>
+        </div>
+        <figcaption class="ehp-cap"><strong>This is a preview.</strong> One question from Eighthundred's homepage, rebuilt here with its own design. Nothing you do here is saved. <a href="https://eighthundred.site" target="_blank" rel="noopener">Open eighthundred.site</a></figcaption>
+      </figure>
     </div>
   </section>
 
@@ -477,6 +604,58 @@ footer p{color:var(--muted); font-size:14px}
 <script>
 (function(){ var o=document.querySelector('.otto'); if(!o||!('IntersectionObserver' in window)) return;
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ o.classList.add('waving'); setTimeout(function(){ o.classList.remove('waving'); },2000); io.disconnect(); } }); },{threshold:.6}); io.observe(o); })();
+</script>
+
+<script>
+/* ---------- Eighthundred preview: the homepage's first question, with its feedback and Reasons ---------- */
+(function(){
+  var root=document.getElementById('ehPreview'); if(!root) return;
+  var q=function(s){ return root.querySelector(s); }, qa=function(s){ return [].slice.call(root.querySelectorAll(s)); };
+  var Q={ans:1, choices:['1.5','5','7','9'],
+    right:'<span class="nw"><i>x</i> = 7</span>, so <span class="nw"><i>x</i> − 2 = 5</span>.',
+    ottoRight:"Right, and you read the question to the end. That's half the battle on the SAT.",
+    wrong:{0:['Subtracting 7 instead of adding it gives 4<i>x</i> = 14, so <i>x</i> = 3.5.','slip',"Your method was fine. The sign flipped at the first step."],
+           2:['7 is the value of <i>x</i>. The question asks for <span class="nw"><i>x</i> − 2</span>.','app',"You solved the equation, then answered a different question. It's the most common miss on this one."],
+           3:['9 is <span class="nw"><i>x</i> + 2</span>. The question asks for <span class="nw"><i>x</i> − 2</span>.','slip',"So close. The last step went the wrong way."]}};
+  var REASONS={slip:['I slipped','I knew how, made an error doing it'],concept:["I didn't know the idea","The method wasn't there yet"],app:["I didn't see it was this idea","I know it, didn't recognize it here"]};
+  var say=function(t){ q('.otto-say .say').innerHTML=t; };
+  var bind=function(){ qa('#ehpChoices .choice-btn').forEach(function(b){ b.addEventListener('click',function(){ answer(+b.dataset.k); }); }); };
+  var draw=function(){
+    q('#ehpChoices').innerHTML=Q.choices.map(function(c,k){ return '<button type="button" class="choice-btn" data-k="'+k+'"><span class="L">'+'ABCD'[k]+'</span><span>'+c+'</span></button>'; }).join('');
+    q('#ehpRes').innerHTML=''; q('#ehpReason').innerHTML=''; q('#ehpAfter').innerHTML='';
+    say("Pick an answer. I'll tell you what happened."); bind();
+  };
+  var answer=function(k){
+    var btns=qa('#ehpChoices .choice-btn');
+    btns.forEach(function(b){ b.disabled=true; });
+    btns[k].setAttribute('aria-pressed','true'); btns[Q.ans].classList.add('right');
+    if(k===Q.ans){
+      q('#ehpRes').innerHTML='<div class="feedback good"><b class="lbl">Right.</b><span>'+Q.right+'</span></div>';
+      say(Q.ottoRight); after();
+    } else {
+      var w=Q.wrong[k]; btns[k].classList.add('wrong');
+      q('#ehpRes').innerHTML='<div class="feedback bad"><b class="lbl">Not this one.</b><span>'+w[0]+' The answer is B.</span></div>';
+      say(w[2]); reasons(w[1]);
+    }
+  };
+  var reasons=function(likely){
+    var box=q('#ehpReason');
+    box.innerHTML='<fieldset class="reason"><legend>Why did it go wrong? Pick a Reason.</legend><div class="opts">'+
+      Object.keys(REASONS).map(function(r){ return '<button type="button" data-r="'+r+'" aria-pressed="false">'+REASONS[r][0]+'<small>'+REASONS[r][1]+'</small></button>'; }).join('')+'</div></fieldset>';
+    qa('#ehpReason button').forEach(function(b){ b.addEventListener('click',function(){
+      qa('#ehpReason button').forEach(function(x){ x.setAttribute('aria-pressed',String(x===b)); });
+      var r=b.dataset.r, name=REASONS[r][0];
+      if(r===likely) say("That's my guess too. In the app this goes into your Mistake Notebook under “"+name+"”, with the fix for it.");
+      else say("Noted. My guess was “"+REASONS[likely][0]+"”. In the app, one follow-up question would settle it, and the fix follows.");
+      after();
+    }); });
+  };
+  var after=function(){
+    q('#ehpAfter').innerHTML='<a class="ehp-btn pri" href="https://eighthundred.site" target="_blank" rel="noopener">Try more on eighthundred.site <span aria-hidden="true">→</span></a><button type="button" class="ehp-btn" id="ehpAgain">Try it again</button>';
+    q('#ehpAgain').addEventListener('click',function(){ draw(); var f=q('#ehpChoices .choice-btn'); if(f) f.focus(); });
+  };
+  bind();
+})();
 </script>
 </body>
 </html>

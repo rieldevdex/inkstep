@@ -1,0 +1,6 @@
+# Not part of the website: never uploaded to Cloudflare
+.git
+.wrangler
+node_modules
+README.txt
+wrangler.jsonc
