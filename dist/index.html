@@ -13,7 +13,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Patrick+Hand&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,700;0,800;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Patrick+Hand&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,700;0,800;1,400&family=JetBrains+Mono:wght@500&family=Atkinson+Hyperlegible+Next:wght@400;700&family=Fraunces:opsz,wght@9..144,600&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/app.js" defer></script>
 </head>
@@ -47,7 +47,7 @@
         <a class="btn btn--ghost" href="#join">Join the club</a>
       </div>
     </div>
-    <dl class="hero__meta"><div><dt>Who</dt><dd>Grades 9–12</dd></div><div><dt>Time</dt><dd>About 3 hours a week</dd></div><div><dt>Next</dt><dd>Public beta of Eighthundred</dd></div></dl>
+    <dl class="hero__meta"><div><dt>Who</dt><dd>Grades 9–12</dd></div><div><dt>Time</dt><dd>About 3 hours a week</dd></div><div><dt>Now</dt><dd>Eighthundred in public beta</dd></div></dl>
   </div>
   <a class="ribbon" href="https://eighthundred.site" target="_blank" rel="noopener" data-cursor="Visit">Now building — Eighthundred</a>
 </section>
@@ -56,18 +56,29 @@
   <div class="container">
     <div class="featured__head">
       <p class="label">Current project</p>
-      <span class="status"><span class="status__pulse" aria-hidden="true"></span>Alpha · live</span>
+      <span class="status"><span class="status__pulse" aria-hidden="true"></span>Beta · live</span>
     </div>
     <h2 class="featured__name" id="work-title">Eighthundred</h2>
     <div class="featured__grid">
-      <a class="preview" href="https://eighthundred.site" target="_blank" rel="noopener" data-cursor="Visit" title="Open eighthundred.site">
-        <span class="preview__bar" aria-hidden="true"><span></span><span></span><span></span><span class="preview__url">eighthundred.site</span></span>
-        <img class="preview__shot" src="assets/eighthundred-1000.webp" srcset="assets/eighthundred-1000.webp 1000w, assets/eighthundred-2000.webp 2000w" sizes="(max-width: 1024px) 92vw, 46vw" width="1000" height="632" alt="Eighthundred home page: the headline “SAT Math you actually understand.” beside an interactive lab where you drag a parabola’s vertex." loading="lazy" decoding="async">
-      </a>
+      <figure class="ehp" aria-label="This is a preview: Eighthundred">
+  <div class="ehp__bar"><span class="ehp__dots" aria-hidden="true"><span></span><span></span><span></span></span><span class="ehp__url">eighthundred.site</span><strong class="ehp__flag">This is a preview</strong></div>
+  <div class="ehp__page">
+    <p class="ehp__brand"><span class="ehp__logo">Eighthundred</span><span class="ehp__beta">Beta</span></p>
+    <div class="ehp__sheet" role="group" aria-labelledby="ehp-question" data-slot="ehp"><p class="ehp__qlabel"><span>Try one. It takes 5 seconds.</span><span>Lesson 1 · Easy</span></p>
+<p class="ehp__question" id="ehp-question">If <span class="nw">4<i>x</i> − 7 = 21</span>, what is the value of <span class="nw"><i>x</i> − 2</span>?</p>
+<div class="ehp__choices"><button type="button" class="ehp__choice" data-eh-pick="0" aria-pressed="false"><span class="ehp__letter">A</span><span class="ehp__text">1.5</span></button><button type="button" class="ehp__choice" data-eh-pick="1" aria-pressed="false"><span class="ehp__letter">B</span><span class="ehp__text">5</span></button><button type="button" class="ehp__choice" data-eh-pick="2" aria-pressed="false"><span class="ehp__letter">C</span><span class="ehp__text">7</span></button><button type="button" class="ehp__choice" data-eh-pick="3" aria-pressed="false"><span class="ehp__letter">D</span><span class="ehp__text">9</span></button></div>
+
+<div class="ehp__otto"><svg class="otto ehp__avatar" viewBox="0 0 120 132" aria-hidden="true" focusable="false"><path class="otto__line" d="M36 92 Q24 92 17 83" stroke-width="6"/><path class="otto__line" d="M84 92 Q96 92 103 83" stroke-width="6"/><ellipse class="otto__shape" cx="60" cy="97" rx="28" ry="24" stroke-width="6"/><ellipse class="otto__shape" cx="60" cy="52" rx="23" ry="21" stroke-width="6"/><ellipse class="otto__cheek" cx="44" cy="58" rx="4.2" ry="2.6"/><ellipse class="otto__cheek" cx="76" cy="58" rx="4.2" ry="2.6"/><ellipse class="otto__eye" cx="52" cy="50" rx="3.4" ry="4.4"/><ellipse class="otto__eye" cx="68" cy="50" rx="3.4" ry="4.4"/><circle class="otto__shine" cx="53.2" cy="48.4" r="1.2"/><circle class="otto__shine" cx="69.2" cy="48.4" r="1.2"/><path class="otto__mouth" d="M55 59 Q60 63.5 65 59" stroke-width="3"/><circle class="otto__dot" cx="60" cy="17" r="6.5"/></svg><p class="ehp__say"><span class="ehp__who">Otto <span class="ehp__tag">AI tutor</span></span>Pick an answer. I’ll tell you what happened.</p></div>
+</div>
+    <p class="ehp__live" role="status" aria-live="polite" data-slot="ehp-live"></p>
+  </div>
+  <figcaption class="ehp__caption"><strong>This is a preview.</strong> One question from Eighthundred’s homepage, rebuilt here with its own design. Nothing you do here is saved. <a href="https://eighthundred.site" target="_blank" rel="noopener">Open eighthundred.site</a></figcaption>
+</figure>
       <div class="featured__body">
-        <p class="featured__summary">A free SAT Math platform named after the perfect score. It teaches step by step, then works out why you got a question wrong and plans practice around it.</p>
-        <div class="stats"><div class="stat"><p class="stat__n">24</p><p class="stat__label">lessons</p><p class="stat__note">across 8 units, with interactive labs</p></div><div class="stat"><p class="stat__n">266</p><p class="stat__label">questions</p><p class="stat__note">96 written in-house, answers checked independently</p></div><div class="stat"><p class="stat__n">72</p><p class="stat__label">generators</p><p class="stat__note">creating new questions without limit</p></div><div class="stat"><p class="stat__n">35</p><p class="stat__label">minutes</p><p class="stat__note">Real Practice: 22 questions, module 2 adapts</p></div></div>
-        <p class="featured__plan">This year the club grows its original question bank, finishes the AI tutor with safety rules for under-18 users, tests it with students at school, and prepares a public beta.</p>
+        <p class="featured__summary">A free SAT Math platform named after the perfect score. It teaches step by step, asks what went wrong after every miss, files the question in a Mistake Notebook, and brings it back until you solve it on your own.</p>
+        <div class="stats"><div class="stat"><p class="stat__n">24</p><p class="stat__label">lessons</p><p class="stat__note">in 8 units, each with an interactive lab</p></div><div class="stat"><p class="stat__n">314</p><p class="stat__label">questions</p><p class="stat__note">each with a full worked solution</p></div><div class="stat"><p class="stat__n">72</p><p class="stat__label">generators</p><p class="stat__note">making new-number versions of each skill</p></div><div class="stat"><p class="stat__n">70</p><p class="stat__label">minutes</p><p class="stat__note">Real Practice: two adaptive modules of 22 questions</p></div></div>
+        <p class="featured__counted">Counted on eighthundred.site on 3 October 2026.</p>
+        <p class="featured__plan">Eighthundred is now in public beta (version 0.10). This year the club grows its original question bank, finishes the AI tutor with safety rules for under-18 users, and tests it with students at school.</p>
         <a class="btn btn--inverse" href="https://eighthundred.site" target="_blank" rel="noopener" data-cursor="Visit">eighthundred.site<svg class="icon icon--arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>

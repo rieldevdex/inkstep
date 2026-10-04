@@ -41,3 +41,13 @@ export function raw(trusted) {
 export function cx(...names) {
   return names.filter(Boolean).join(' ');
 }
+
+/**
+ * Question text with two tiny marks, escaped first: *x* is a math variable (italic),
+ * {…} keeps a piece of math on one line.
+ */
+export function mathText(text) {
+  return new SafeHtml(escapeHtml(text)
+    .replace(/\*([^*]+)\*/g, '<i>$1</i>')
+    .replace(/\{([^{}]+)\}/g, '<span class="nw">$1</span>'));
+}

@@ -72,8 +72,8 @@ are the only `px` allowed outside `tokens.css`, and only inside `@media`.
 - **Atoms**: Button (solid / ghost / inverse), Chip (toggle), Label (mono),
   Dot, Wordmark, InkStroke, Icon.
 - **Molecules**: StatTile, TeamCard, EventRow (accordion), StepItem, FilterBar.
-- **Organisms**: SiteHeader, Hero, Ticker, FeaturedProject, TeamsGrid,
-  ProcessTrack, EventsList, JoinBand, SiteFooter.
+- **Organisms**: SiteHeader, Hero, Ticker, FeaturedProject (with
+  EighthundredPreview), TeamsGrid, ProcessTrack, EventsList, JoinBand, SiteFooter.
 
 Components are pure functions `(props) → SafeHtml`. They never read the DOM,
 the store or the network. Behavior lives in `src/client/`, state in
@@ -85,3 +85,19 @@ Contrast ≥ 4.5:1 for text, 3:1 for UI and large text. Every control is a real
 `<button>` or `<a>`, toggles expose `aria-pressed` / `aria-expanded`, focus is
 always visible (`--color-dot` outline), there is a skip link, and nothing
 depends on hover or on the custom cursor.
+
+## 9. The Eighthundred preview
+
+The one place that does not use the Inkstep look. In "Current project", a working
+copy of one question from eighthundred.site's homepage shows Eighthundred as it
+really looks: its cream paper, terracotta pen, highlighter yellow, Fraunces and
+Atkinson Hyperlegible Next, its answer choices, feedback, Reasons and Otto.
+
+- It is always marked **"This is a preview"**: in its browser bar and in its caption.
+- Its values are the `--color-eh-*`, `--font-eh-*`, `--eh-*` and `--shadow-eh-*`
+  tokens in `tokens.css`, copied from eighthundred.site's design system, with a
+  dark value for every color. Only `.ehp` rules in `organisms.css` may use them.
+- Copy and the question live in `src/content/site.js` (`featured.preview`);
+  state in `src/state` (`preview/pick`, `preview/reason`, `preview/reset`).
+- Nothing is saved. When Eighthundred's homepage question or look changes, update
+  the content and tokens together.

@@ -70,10 +70,59 @@ test('Page has one h1, a skip link and unique ids', () => {
   ['work', 'teams', 'process', 'events', 'join'].forEach((id) => assert.ok(ids.includes(id), `missing #${id}`));
 });
 
-test('FeaturedProject shows the real screenshot with size and alt text', async () => {
+test('FeaturedProject shows a live Eighthundred preview, marked as a preview, and when its numbers were counted', async () => {
   const { FeaturedProject } = await import('../src/components/organisms.js');
   const out = FeaturedProject({ featured: site.featured }).value;
-  assert.match(out, /<img class="preview__shot" src="assets\/eighthundred-1000\.webp"/);
-  assert.match(out, /width="1000" height="632"/);
-  assert.match(out, /alt="Eighthundred home page/);
+  assert.doesNotMatch(out, /<img|\.webp/);
+  assert.match(out, /<strong class="ehp__flag">This is a preview<\/strong>/);
+  assert.match(out, /<figcaption class="ehp__caption"><strong>This is a preview\.<\/strong>/);
+  assert.equal((out.match(/data-eh-pick=/g) || []).length, 4);
+  assert.match(out, /Counted on eighthundred\.site on 3 October 2026\./);
+});
+
+test('mathText escapes, then italicises *x* and keeps {…} on one line', async () => {
+  const { mathText } = await import('../src/lib/html.js');
+  assert.equal(mathText('If {4*x* − 7 = 21} & <b>').value, 'If <span class="nw">4<i>x</i> − 7 = 21</span> &amp; &lt;b&gt;');
+});
+
+test('PreviewQuestion: before answering, no feedback and Otto invites an answer', async () => {
+  const { PreviewQuestion } = await import('../src/components/preview.js');
+  const { preview } = site.featured;
+  const out = PreviewQuestion({ preview, state: initialState, url: site.featured.url }).value;
+  assert.doesNotMatch(out, /ehp__feedback|data-eh-reason|disabled/);
+  assert.match(out, new RegExp(preview.otto.start));
+});
+
+test('PreviewQuestion: a wrong answer locks the choices, explains it and asks for a Reason', async () => {
+  const { PreviewQuestion, previewAnnouncement } = await import('../src/components/preview.js');
+  const { preview } = site.featured;
+  const state = { ...initialState, preview: { pick: 2, reason: null } };
+  const out = PreviewQuestion({ preview, state, url: site.featured.url }).value;
+  assert.equal((out.match(/ disabled/g) || []).length, 4);
+  assert.match(out, /is-wrong" data-eh-pick="2" aria-pressed="true"/);
+  assert.match(out, /is-right" data-eh-pick="1"/);
+  assert.match(out, /Not this one\.<\/b> 7 is the value of <i>x<\/i>\./);
+  assert.equal((out.match(/data-eh-reason=/g) || []).length, 3);
+  assert.doesNotMatch(out, /data-eh-reset/);
+  assert.match(previewAnnouncement(preview, state), /^Not this one\. 7 is the value of x\. .*The answer is B\. Otto: /);
+});
+
+test('PreviewQuestion: Otto agrees or differs with the chosen Reason, then offers another try', async () => {
+  const { PreviewQuestion } = await import('../src/components/preview.js');
+  const { preview } = site.featured;
+  const agree = PreviewQuestion({ preview, state: { ...initialState, preview: { pick: 2, reason: 'app' } }, url: site.featured.url }).value;
+  assert.match(agree, /That’s my guess too\. .*under “I didn’t see it was this idea”/);
+  assert.match(agree, /data-eh-reason="app" aria-pressed="true"/);
+  assert.match(agree, /data-eh-reset/);
+  const differ = PreviewQuestion({ preview, state: { ...initialState, preview: { pick: 0, reason: 'concept' } }, url: site.featured.url }).value;
+  assert.match(differ, /My guess was “I slipped”/);
+});
+
+test('PreviewQuestion: the right answer needs no Reason', async () => {
+  const { PreviewQuestion } = await import('../src/components/preview.js');
+  const { preview } = site.featured;
+  const out = PreviewQuestion({ preview, state: { ...initialState, preview: { pick: 1, reason: null } }, url: site.featured.url }).value;
+  assert.match(out, /ehp__feedback--good"><b>Right\.<\/b>/);
+  assert.doesNotMatch(out, /data-eh-reason/);
+  assert.match(out, /data-eh-reset/);
 });

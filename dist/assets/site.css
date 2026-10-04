@@ -78,6 +78,50 @@
   --ticker-speed: 38s;
   --dur-pulse: 2s;
 
+  /* Eighthundred preview only: Eighthundred's own palette, type and sizes, copied from eighthundred.site.
+     Used by .ehp in organisms.css and nowhere else. See DESIGN.md §9. */
+  --color-eh-paper: #F5EFE3;
+  --color-eh-grid: #E9E0CE;
+  --color-eh-surface: #FFFCF5;
+  --color-eh-surface-2: #F1E9DA;
+  --color-eh-ink: #221D17;
+  --color-eh-ink-2: #5E564B;
+  --color-eh-rule: #E3D8C4;
+  --color-eh-rule-strong: #8C8070;
+  --color-eh-pen: #A63D22;
+  --color-eh-on-pen: #FFFFFF;
+  --color-eh-red: #A8301F;
+  --color-eh-red-soft: #F8E3DA;
+  --color-eh-green: #2F6B42;
+  --color-eh-green-soft: #E7F0E2;
+  --color-eh-hl: #F2D46A;
+  --color-eh-on-hl: #221D17;
+  --color-eh-otto: #A9500F;
+  --color-eh-otto-soft: #FBE7D3;
+  --color-eh-cheek: #F2A49A;
+  --eh-speck: rgba(120, 90, 40, .07);
+  --shadow-eh-1: 0 1px 0 rgba(60, 40, 10, .04), 0 8px 24px -14px rgba(60, 40, 10, .25);
+  --shadow-eh-2: 0 2px 0 rgba(60, 40, 10, .05), 0 18px 40px -22px rgba(60, 40, 10, .45);
+  --font-eh-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-eh-text: 'Atkinson Hyperlegible Next', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-eh-math: 'STIX Two Math', 'Cambria Math', 'Latin Modern Math', 'Times New Roman', serif;
+  --eh-weight-display: 600;
+  --eh-text-xs: 0.8125rem;
+  --eh-text-sm: 0.9375rem;
+  --eh-text-md: 1.0625rem;
+  --eh-text-q: 1.1875rem;
+  --eh-text-logo: 1.375rem;
+  --eh-leading: 1.45;
+  --eh-rule: 1.5px;
+  --eh-radius-md: 12px;
+  --eh-radius-lg: 16px;
+  --eh-size-letter: 28px;
+  --eh-size-avatar: 52px;
+  --eh-size-avatar-h: 58px;
+  --eh-grid-step: 18px;
+  --eh-speck-step: 5px;
+  --eh-measure: 46ch;
+
   /* layers */
   --z-canvas: 0;
   --z-content: 1;
@@ -100,6 +144,28 @@
     --ink-rgb: 239 232 218;
     --theme-icon-sun: block;
     --theme-icon-moon: none;
+    --color-eh-paper: #1C1915;
+    --color-eh-grid: #26221C;
+    --color-eh-surface: #24201A;
+    --color-eh-surface-2: #2C271F;
+    --color-eh-ink: #F0E8DA;
+    --color-eh-ink-2: #BDB2A1;
+    --color-eh-rule: #3A3329;
+    --color-eh-rule-strong: #7E7363;
+    --color-eh-pen: #E8896C;
+    --color-eh-on-pen: #1C1915;
+    --color-eh-red: #F0907A;
+    --color-eh-red-soft: #3A221C;
+    --color-eh-green: #8CC49A;
+    --color-eh-green-soft: #1F2F22;
+    --color-eh-hl: #E2C15A;
+    --color-eh-on-hl: #1C1915;
+    --color-eh-otto: #F0A35E;
+    --color-eh-otto-soft: #3A2816;
+    --color-eh-cheek: #F2A49A;
+    --eh-speck: rgba(255, 235, 200, .035);
+    --shadow-eh-1: 0 1px 0 rgba(0, 0, 0, .25), 0 8px 22px -14px rgba(0, 0, 0, .7);
+    --shadow-eh-2: 0 2px 0 rgba(0, 0, 0, .3), 0 20px 44px -22px rgba(0, 0, 0, .8);
     color-scheme: dark;
   }
 }
@@ -117,6 +183,28 @@
   --ink-rgb: 239 232 218;
   --theme-icon-sun: block;
   --theme-icon-moon: none;
+  --color-eh-paper: #1C1915;
+  --color-eh-grid: #26221C;
+  --color-eh-surface: #24201A;
+  --color-eh-surface-2: #2C271F;
+  --color-eh-ink: #F0E8DA;
+  --color-eh-ink-2: #BDB2A1;
+  --color-eh-rule: #3A3329;
+  --color-eh-rule-strong: #7E7363;
+  --color-eh-pen: #E8896C;
+  --color-eh-on-pen: #1C1915;
+  --color-eh-red: #F0907A;
+  --color-eh-red-soft: #3A221C;
+  --color-eh-green: #8CC49A;
+  --color-eh-green-soft: #1F2F22;
+  --color-eh-hl: #E2C15A;
+  --color-eh-on-hl: #1C1915;
+  --color-eh-otto: #F0A35E;
+  --color-eh-otto-soft: #3A2816;
+  --color-eh-cheek: #F2A49A;
+  --eh-speck: rgba(255, 235, 200, .035);
+  --shadow-eh-1: 0 1px 0 rgba(0, 0, 0, .25), 0 8px 22px -14px rgba(0, 0, 0, .7);
+  --shadow-eh-2: 0 2px 0 rgba(0, 0, 0, .3), 0 20px 44px -22px rgba(0, 0, 0, .8);
   color-scheme: dark;
 }
 
@@ -372,12 +460,70 @@ img, svg { max-width: 100%; }
 .featured__plan { color: var(--color-inverse-2); max-width: var(--measure); }
 .featured__body .stats { justify-self: stretch; }
 
-.preview { display: grid; grid-template-rows: auto 1fr; max-width: 100%; background: var(--color-paper); color: var(--color-ink); border-radius: var(--radius-sm); overflow: hidden; text-decoration: none; }
-.preview__bar { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-3) var(--space-4); border-bottom: var(--rule-hair) solid var(--color-line); }
-.preview__bar > span:not(.preview__url) { width: var(--size-dot-ui); height: var(--size-dot-ui); border-radius: var(--radius-pill); border: var(--rule-hair) solid var(--color-ink-2); }
-.preview__url { margin-left: var(--space-3); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-ink-2); }
-.preview__shot { display: block; width: 100%; height: auto; transition: transform var(--dur-med) var(--ease-out); transform-origin: top center; }
-.preview:hover .preview__shot { transform: scale(1.02); }
+.featured__counted { margin-top: calc(-1 * var(--space-3)); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-inverse-2); }
+
+/* Eighthundred preview: Eighthundred's own look (its --*-eh-* tokens only), inside an Inkstep browser frame */
+.ehp { position: relative; display: grid; margin: 0; max-width: 100%; overflow: hidden; border-radius: var(--radius-sm); background: var(--color-eh-paper); color: var(--color-eh-ink); font-family: var(--font-eh-text); font-size: var(--eh-text-md); line-height: var(--leading-body); }
+.ehp__bar { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-3) var(--space-4); background: var(--color-eh-surface-2); border-bottom: var(--rule-hair) solid var(--color-eh-rule); }
+.ehp__dots { display: flex; gap: var(--space-2); flex: none; }
+.ehp__dots span { width: var(--size-dot-ui); height: var(--size-dot-ui); border-radius: var(--radius-pill); border: var(--rule-hair) solid var(--color-eh-ink-2); }
+.ehp__url { flex: 1; min-width: 0; margin-left: var(--space-2); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-eh-ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ehp__flag { flex: none; padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); background: var(--color-eh-hl); color: var(--color-eh-on-hl); font-size: var(--eh-text-xs); font-weight: var(--weight-bold); line-height: var(--leading-snug); }
+.ehp__page { display: grid; gap: var(--space-4); padding: var(--space-5); background-color: var(--color-eh-paper); background-image: radial-gradient(var(--eh-speck) var(--rule-hair), transparent var(--rule-hair)); background-size: var(--eh-speck-step) var(--eh-speck-step); }
+.ehp__brand { display: flex; align-items: center; gap: var(--space-2); }
+.ehp__logo { font-family: var(--font-eh-display); font-size: var(--eh-text-logo); font-weight: var(--eh-weight-display); line-height: var(--leading-snug); }
+.ehp__beta { padding: 0 var(--space-2); border: var(--eh-rule) solid var(--color-eh-pen); border-radius: var(--radius-pill); color: var(--color-eh-pen); font-size: var(--eh-text-xs); font-weight: var(--weight-bold); }
+.ehp__sheet { padding: var(--space-4); border: var(--eh-rule) solid var(--color-eh-ink); border-radius: var(--eh-radius-lg); box-shadow: var(--shadow-eh-2);
+  background-color: var(--color-eh-surface); background-size: var(--eh-grid-step) var(--eh-grid-step);
+  background-image: linear-gradient(var(--color-eh-grid) var(--rule-hair), transparent var(--rule-hair)), linear-gradient(90deg, var(--color-eh-grid) var(--rule-hair), transparent var(--rule-hair)); }
+.ehp__qlabel { display: flex; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-2); font-size: var(--eh-text-xs); font-weight: var(--weight-bold); color: var(--color-eh-ink-2); }
+.ehp__qlabel span:last-child { white-space: nowrap; }
+.ehp__question { font-size: var(--eh-text-q); line-height: var(--eh-leading); }
+.ehp i { font-family: var(--font-eh-math); font-size: 1.08em; }
+.ehp .nw { white-space: nowrap; }
+.ehp__choices { display: grid; gap: var(--space-2); margin-top: var(--space-3); }
+.ehp__choice { display: flex; align-items: center; gap: var(--space-3); width: 100%; min-height: var(--size-touch); padding: var(--space-2) var(--space-3); border: var(--eh-rule) solid var(--color-eh-rule-strong); border-radius: var(--eh-radius-md); background: var(--color-eh-surface); color: var(--color-eh-ink); font: inherit; text-align: left; cursor: pointer; transition: border-color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out); }
+.ehp__choice:hover:not(:disabled) { border-color: var(--color-eh-ink); }
+.ehp__choice:disabled { cursor: default; }
+.ehp__choice:disabled:not(.is-right):not(.is-wrong) { opacity: .6; }
+.ehp__letter { flex: none; display: grid; place-items: center; width: var(--eh-size-letter); height: var(--eh-size-letter); border: var(--eh-rule) solid var(--color-eh-ink); border-radius: var(--radius-pill); font-size: var(--eh-text-xs); font-weight: var(--weight-bold); }
+.ehp__choice.is-right { border-color: var(--color-eh-green); background: var(--color-eh-green-soft); }
+.ehp__choice.is-right .ehp__letter { border-color: var(--color-eh-green); background: var(--color-eh-green); color: var(--color-eh-surface); }
+.ehp__choice.is-wrong { border-color: var(--color-eh-red); background: var(--color-eh-red-soft); }
+.ehp__choice.is-wrong .ehp__letter { border-color: var(--color-eh-red); color: var(--color-eh-red); }
+.ehp__choice.is-wrong .ehp__text { text-decoration: line-through; text-decoration-color: var(--color-eh-red); text-decoration-thickness: var(--rule-ink); }
+.ehp__feedback { margin-top: var(--space-3); padding: var(--space-3) var(--space-4); border: var(--eh-rule) solid transparent; border-radius: var(--eh-radius-md); }
+.ehp__feedback--good { background: var(--color-eh-green-soft); border-color: color-mix(in srgb, var(--color-eh-green) 40%, transparent); }
+.ehp__feedback--good b { color: var(--color-eh-green); }
+.ehp__feedback--bad { background: var(--color-eh-red-soft); border-color: color-mix(in srgb, var(--color-eh-red) 40%, transparent); }
+.ehp__feedback--bad b { color: var(--color-eh-red); }
+.ehp__otto { display: flex; align-items: flex-end; gap: var(--space-3); margin-top: var(--space-4); }
+.ehp__avatar { flex: none; width: var(--eh-size-avatar); height: var(--eh-size-avatar-h); overflow: visible; }
+.otto__line, .otto__mouth { fill: none; stroke: var(--color-eh-ink); stroke-linecap: round; }
+.otto__shape { fill: var(--color-eh-surface); stroke: var(--color-eh-ink); }
+.otto__eye { fill: var(--color-eh-ink); }
+.otto__shine { fill: var(--color-eh-surface); }
+.otto__cheek { fill: var(--color-eh-cheek); opacity: .55; }
+.otto__dot { fill: var(--color-eh-otto); }
+.ehp__say { max-width: var(--eh-measure); padding: var(--space-2) var(--space-4); border: var(--eh-rule) solid var(--color-eh-otto); border-radius: var(--eh-radius-lg) var(--eh-radius-lg) var(--eh-radius-lg) var(--space-1); background: var(--color-eh-surface); box-shadow: var(--shadow-eh-1); font-size: var(--eh-text-sm); line-height: var(--eh-leading); }
+.ehp__who { display: flex; align-items: center; gap: var(--space-2); font-size: var(--eh-text-xs); font-weight: var(--weight-bold); color: var(--color-eh-otto); }
+.ehp__tag { padding: 0 var(--space-2); border-radius: var(--radius-pill); background: var(--color-eh-otto-soft); }
+.ehp__reason { min-width: 0; margin: var(--space-3) 0 0; padding: var(--space-3) var(--space-4); border: var(--eh-rule) dashed var(--color-eh-rule-strong); border-radius: var(--eh-radius-md); background: var(--color-eh-surface); }
+.ehp__reason legend { padding: 0 var(--space-1); font-size: var(--eh-text-sm); font-weight: var(--weight-bold); }
+.ehp__options { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
+.ehp__options button { min-height: var(--size-touch); padding: var(--space-2) var(--space-3); border: var(--eh-rule) solid var(--color-eh-rule-strong); border-radius: var(--eh-radius-md); background: var(--color-eh-surface); color: var(--color-eh-ink); font: inherit; font-size: var(--eh-text-sm); font-weight: var(--weight-bold); line-height: var(--eh-leading); text-align: left; cursor: pointer; }
+.ehp__options small { display: block; font-size: var(--eh-text-xs); font-weight: var(--weight-regular); color: var(--color-eh-ink-2); }
+.ehp__options [aria-pressed="true"] { background: var(--color-eh-hl); border-color: var(--color-eh-ink); color: var(--color-eh-on-hl); }
+.ehp__options [aria-pressed="true"] small { color: var(--color-eh-on-hl); }
+.ehp__after { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+.ehp__btn { display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--size-touch); padding: var(--space-2) var(--space-4); border: var(--eh-rule) solid var(--color-eh-rule-strong); border-radius: var(--eh-radius-md); background: var(--color-eh-surface); color: var(--color-eh-ink); font: inherit; font-size: var(--eh-text-sm); font-weight: var(--weight-bold); text-decoration: none; cursor: pointer; }
+.ehp__btn:hover { border-color: var(--color-eh-ink); }
+.ehp__btn--primary { background: var(--color-eh-ink); border-color: var(--color-eh-ink); color: var(--color-eh-paper); }
+.ehp__btn--primary:hover { background: var(--color-eh-pen); border-color: var(--color-eh-pen); color: var(--color-eh-on-pen); }
+.ehp__live { position: absolute; width: var(--rule-hair); height: var(--rule-hair); overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.ehp__caption { padding: var(--space-3) var(--space-4); border-top: var(--rule-hair) solid var(--color-eh-rule); background: var(--color-eh-surface); color: var(--color-eh-ink-2); font-size: var(--text-sm); }
+.ehp__caption strong { color: var(--color-eh-ink); }
+.ehp__caption a { color: var(--color-eh-pen); font-weight: var(--weight-bold); }
 
 /* TeamsGrid */
 .teams__bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-4); margin-bottom: var(--space-7); }

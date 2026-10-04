@@ -78,6 +78,50 @@
   --ticker-speed: 38s;
   --dur-pulse: 2s;
 
+  /* Eighthundred preview only: Eighthundred's own palette, type and sizes, copied from eighthundred.site.
+     Used by .ehp in organisms.css and nowhere else. See DESIGN.md §9. */
+  --color-eh-paper: #F5EFE3;
+  --color-eh-grid: #E9E0CE;
+  --color-eh-surface: #FFFCF5;
+  --color-eh-surface-2: #F1E9DA;
+  --color-eh-ink: #221D17;
+  --color-eh-ink-2: #5E564B;
+  --color-eh-rule: #E3D8C4;
+  --color-eh-rule-strong: #8C8070;
+  --color-eh-pen: #A63D22;
+  --color-eh-on-pen: #FFFFFF;
+  --color-eh-red: #A8301F;
+  --color-eh-red-soft: #F8E3DA;
+  --color-eh-green: #2F6B42;
+  --color-eh-green-soft: #E7F0E2;
+  --color-eh-hl: #F2D46A;
+  --color-eh-on-hl: #221D17;
+  --color-eh-otto: #A9500F;
+  --color-eh-otto-soft: #FBE7D3;
+  --color-eh-cheek: #F2A49A;
+  --eh-speck: rgba(120, 90, 40, .07);
+  --shadow-eh-1: 0 1px 0 rgba(60, 40, 10, .04), 0 8px 24px -14px rgba(60, 40, 10, .25);
+  --shadow-eh-2: 0 2px 0 rgba(60, 40, 10, .05), 0 18px 40px -22px rgba(60, 40, 10, .45);
+  --font-eh-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-eh-text: 'Atkinson Hyperlegible Next', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-eh-math: 'STIX Two Math', 'Cambria Math', 'Latin Modern Math', 'Times New Roman', serif;
+  --eh-weight-display: 600;
+  --eh-text-xs: 0.8125rem;
+  --eh-text-sm: 0.9375rem;
+  --eh-text-md: 1.0625rem;
+  --eh-text-q: 1.1875rem;
+  --eh-text-logo: 1.375rem;
+  --eh-leading: 1.45;
+  --eh-rule: 1.5px;
+  --eh-radius-md: 12px;
+  --eh-radius-lg: 16px;
+  --eh-size-letter: 28px;
+  --eh-size-avatar: 52px;
+  --eh-size-avatar-h: 58px;
+  --eh-grid-step: 18px;
+  --eh-speck-step: 5px;
+  --eh-measure: 46ch;
+
   /* layers */
   --z-canvas: 0;
   --z-content: 1;
@@ -100,6 +144,28 @@
     --ink-rgb: 239 232 218;
     --theme-icon-sun: block;
     --theme-icon-moon: none;
+    --color-eh-paper: #1C1915;
+    --color-eh-grid: #26221C;
+    --color-eh-surface: #24201A;
+    --color-eh-surface-2: #2C271F;
+    --color-eh-ink: #F0E8DA;
+    --color-eh-ink-2: #BDB2A1;
+    --color-eh-rule: #3A3329;
+    --color-eh-rule-strong: #7E7363;
+    --color-eh-pen: #E8896C;
+    --color-eh-on-pen: #1C1915;
+    --color-eh-red: #F0907A;
+    --color-eh-red-soft: #3A221C;
+    --color-eh-green: #8CC49A;
+    --color-eh-green-soft: #1F2F22;
+    --color-eh-hl: #E2C15A;
+    --color-eh-on-hl: #1C1915;
+    --color-eh-otto: #F0A35E;
+    --color-eh-otto-soft: #3A2816;
+    --color-eh-cheek: #F2A49A;
+    --eh-speck: rgba(255, 235, 200, .035);
+    --shadow-eh-1: 0 1px 0 rgba(0, 0, 0, .25), 0 8px 22px -14px rgba(0, 0, 0, .7);
+    --shadow-eh-2: 0 2px 0 rgba(0, 0, 0, .3), 0 20px 44px -22px rgba(0, 0, 0, .8);
     color-scheme: dark;
   }
 }
@@ -117,5 +183,27 @@
   --ink-rgb: 239 232 218;
   --theme-icon-sun: block;
   --theme-icon-moon: none;
+  --color-eh-paper: #1C1915;
+  --color-eh-grid: #26221C;
+  --color-eh-surface: #24201A;
+  --color-eh-surface-2: #2C271F;
+  --color-eh-ink: #F0E8DA;
+  --color-eh-ink-2: #BDB2A1;
+  --color-eh-rule: #3A3329;
+  --color-eh-rule-strong: #7E7363;
+  --color-eh-pen: #E8896C;
+  --color-eh-on-pen: #1C1915;
+  --color-eh-red: #F0907A;
+  --color-eh-red-soft: #3A221C;
+  --color-eh-green: #8CC49A;
+  --color-eh-green-soft: #1F2F22;
+  --color-eh-hl: #E2C15A;
+  --color-eh-on-hl: #1C1915;
+  --color-eh-otto: #F0A35E;
+  --color-eh-otto-soft: #3A2816;
+  --color-eh-cheek: #F2A49A;
+  --eh-speck: rgba(255, 235, 200, .035);
+  --shadow-eh-1: 0 1px 0 rgba(0, 0, 0, .25), 0 8px 22px -14px rgba(0, 0, 0, .7);
+  --shadow-eh-2: 0 2px 0 rgba(0, 0, 0, .3), 0 20px 44px -22px rgba(0, 0, 0, .8);
   color-scheme: dark;
 }

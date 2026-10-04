@@ -2,7 +2,9 @@
 import { html } from '../lib/html.js';
 import { Button, Dot, Icon, InkStroke, Label, Wordmark } from './atoms.js';
 import { EventRow, FilterBar, PathItem, StatTile, StepItem, TeamCard } from './molecules.js';
+import { EighthundredPreview } from './preview.js';
 import { countByGroup, selectVisibleTeams } from '../state/selectors.js';
+import { initialState } from '../state/reducer.js';
 
 export function SiteHeader({ site, state }) {
   return html`<header class="header" data-menu-open="${state.menuOpen ? 'true' : 'false'}">
@@ -48,7 +50,7 @@ export function Ticker({ items }) {
   return html`<div class="ticker" aria-label="What we stand for"><div class="ticker__track">${row(false)}${row(true)}</div></div>`;
 }
 
-export function FeaturedProject({ featured }) {
+export function FeaturedProject({ featured, state = initialState }) {
   return html`<section class="band band--inverse featured" id="work" aria-labelledby="work-title">
   <div class="container">
     <div class="featured__head">
@@ -57,13 +59,11 @@ export function FeaturedProject({ featured }) {
     </div>
     <h2 class="featured__name" id="work-title">${featured.name}</h2>
     <div class="featured__grid">
-      <a class="preview" href="${featured.url}" target="_blank" rel="noopener" data-cursor="Visit" title="Open ${featured.host}">
-        <span class="preview__bar" aria-hidden="true"><span></span><span></span><span></span><span class="preview__url">${featured.host}</span></span>
-        <img class="preview__shot" src="${featured.screenshot.src}" srcset="${featured.screenshot.src} 1000w, ${featured.screenshot.src2x} 2000w" sizes="(max-width: 1024px) 92vw, 46vw" width="${featured.screenshot.width}" height="${featured.screenshot.height}" alt="${featured.screenshot.alt}" loading="lazy" decoding="async">
-      </a>
+      ${EighthundredPreview({ preview: featured.preview, state, url: featured.url, host: featured.host })}
       <div class="featured__body">
         <p class="featured__summary">${featured.summary}</p>
         <div class="stats">${featured.stats.map(StatTile)}</div>
+        <p class="featured__counted">${featured.statsNote}</p>
         <p class="featured__plan">${featured.plan}</p>
         ${Button({ href: featured.url, text: featured.host, variant: 'inverse', external: true, cursor: 'Visit' })}
       </div>

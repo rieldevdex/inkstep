@@ -72,3 +72,38 @@ test('theme toggle always flips what the viewer sees', () => {
   assert.equal(nextTheme('system', false), 'dark');
   assert.equal(nextTheme('dark', false), 'light');
 });
+
+test('preview/pick takes one valid answer, then locks until reset', () => {
+  const picked = reducer(initialState, actions.previewPick(2));
+  assert.deepEqual(picked.preview, { pick: 2, reason: null });
+  assert.equal(reducer(picked, actions.previewPick(1)), picked);
+  assert.equal(reducer(initialState, actions.previewPick(4)), initialState);
+  assert.equal(reducer(initialState, actions.previewPick('1')), initialState);
+  assert.equal(initialState.preview.pick, null);
+});
+
+test('preview/reason needs an answer first and a known Reason', () => {
+  assert.equal(reducer(initialState, actions.previewReason('slip')), initialState);
+  const picked = reducer(initialState, actions.previewPick(0));
+  assert.equal(reducer(picked, actions.previewReason('luck')), picked);
+  const reasoned = reducer(picked, actions.previewReason('slip'));
+  assert.equal(reasoned.preview.reason, 'slip');
+  assert.equal(reducer(reasoned, actions.previewReason('slip')), reasoned);
+});
+
+test('preview/reset starts over, and is a no-op before answering', () => {
+  assert.equal(reducer(initialState, actions.previewReset()), initialState);
+  const done = reducer(reducer(initialState, actions.previewPick(3)), actions.previewReason('slip'));
+  assert.deepEqual(reducer(done, actions.previewReset()).preview, { pick: null, reason: null });
+});
+
+test('selectPreview mirrors eighthundred.site: Reasons only after a miss, done after one', async () => {
+  const { selectPreview } = await import('../src/state/selectors.js');
+  const { preview } = site.featured;
+  const at = (pick, reason = null) => selectPreview({ ...initialState, preview: { pick, reason } }, preview);
+  assert.equal(at(null).otto, preview.otto.start);
+  assert.deepEqual([at(1).right, at(1).askReason, at(1).done], [true, false, true]);
+  assert.deepEqual([at(3).right, at(3).askReason, at(3).done], [false, true, false]);
+  assert.equal(at(3).otto, preview.wrong[3].otto);
+  assert.equal(at(3, 'slip').done, true);
+});

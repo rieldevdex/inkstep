@@ -8,7 +8,7 @@ ${SiteHeader({ site, state })}
 <main id="main">
 ${Hero({ site })}
 ${Ticker({ items: site.ticker })}
-${FeaturedProject({ featured: site.featured })}
+${FeaturedProject({ featured: site.featured, state })}
 ${TeamsGrid({ site, state })}
 ${ProcessTrack({ process: site.process })}
 ${EventsList({ events: site.events })}

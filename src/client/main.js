@@ -7,6 +7,7 @@ import { createStore } from '../state/store.js';
 import { reducer, initialState, actions } from '../state/reducer.js';
 import { nextTheme, selectVisibleTeams } from '../state/selectors.js';
 import { TeamsList } from '../components/organisms.js';
+import { PreviewQuestion, previewAnnouncement } from '../components/preview.js';
 import { Icon } from '../components/atoms.js';
 import { mountInk } from './ink.js';
 import { mountCursor } from './cursor.js';
@@ -39,6 +40,9 @@ function boot() {
   const menuBtn = $('[data-action="menu"]');
   const teamsSlot = $('[data-slot="teams"]');
   const countSlot = $('[data-slot="team-count"]');
+  const previewSlot = $('[data-slot="ehp"]');
+  const previewLive = $('[data-slot="ehp-live"]');
+  const { featured } = site;
 
   if (store.getState().theme !== 'system') applyTheme(store.getState().theme);
 
@@ -63,9 +67,37 @@ function boot() {
       });
       countSlot.textContent = `Showing ${selectVisibleTeams(state, site.teams).length} of ${site.teams.length}`;
     }
+    if (state.preview !== prev.preview && previewSlot) {
+      previewSlot.innerHTML = PreviewQuestion({ preview: featured.preview, state, url: featured.url }).value;
+      previewLive.textContent = previewAnnouncement(featured.preview, state);
+    }
   });
 
+  // Eighthundred preview: after each step, focus moves to what comes next (choices lock once answered)
+  const focusIn = (sel) => previewSlot?.querySelector(sel)?.focus();
+  function onPreview(target) {
+    const pick = target.closest('[data-eh-pick]');
+    if (pick) {
+      store.dispatch(actions.previewPick(Number(pick.dataset.ehPick)));
+      focusIn('[data-eh-reason], [data-eh-reset]'); // the Reasons after a miss, or "Try it again"
+      return true;
+    }
+    const reason = target.closest('[data-eh-reason]');
+    if (reason) {
+      store.dispatch(actions.previewReason(reason.dataset.ehReason));
+      focusIn(`[data-eh-reason="${reason.dataset.ehReason}"]`);
+      return true;
+    }
+    if (target.closest('[data-eh-reset]')) {
+      store.dispatch(actions.previewReset());
+      focusIn('[data-eh-pick]');
+      return true;
+    }
+    return false;
+  }
+
   document.addEventListener('click', (e) => {
+    if (onPreview(e.target)) return undefined;
     const chip = e.target.closest('[data-filter]');
     if (chip) return void store.dispatch(actions.filterTeams(chip.dataset.filter));
     const action = e.target.closest('[data-action]')?.dataset.action;

@@ -43,3 +43,8 @@ const ICONS = {
 export function Icon(name) {
   return raw(`<svg class="icon icon--${name}" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">${ICONS[name]}</svg>`);
 }
+
+/** Otto, Eighthundred's AI tutor, as drawn on eighthundred.site. Decorative: always aria-hidden. */
+export function Otto({ className } = {}) {
+  return raw(`<svg class="${cx('otto', className)}" viewBox="0 0 120 132" aria-hidden="true" focusable="false"><path class="otto__line" d="M36 92 Q24 92 17 83" stroke-width="6"/><path class="otto__line" d="M84 92 Q96 92 103 83" stroke-width="6"/><ellipse class="otto__shape" cx="60" cy="97" rx="28" ry="24" stroke-width="6"/><ellipse class="otto__shape" cx="60" cy="52" rx="23" ry="21" stroke-width="6"/><ellipse class="otto__cheek" cx="44" cy="58" rx="4.2" ry="2.6"/><ellipse class="otto__cheek" cx="76" cy="58" rx="4.2" ry="2.6"/><ellipse class="otto__eye" cx="52" cy="50" rx="3.4" ry="4.4"/><ellipse class="otto__eye" cx="68" cy="50" rx="3.4" ry="4.4"/><circle class="otto__shine" cx="53.2" cy="48.4" r="1.2"/><circle class="otto__shine" cx="69.2" cy="48.4" r="1.2"/><path class="otto__mouth" d="M55 59 Q60 63.5 65 59" stroke-width="3"/><circle class="otto__dot" cx="60" cy="17" r="6.5"/></svg>`);
+}

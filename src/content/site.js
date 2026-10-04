@@ -24,7 +24,7 @@ export const site = {
     meta: [
       { k: 'Who', v: 'Grades 9–12' },
       { k: 'Time', v: 'About 3 hours a week' },
-      { k: 'Next', v: 'Public beta of Eighthundred' },
+      { k: 'Now', v: 'Eighthundred in public beta' },
     ],
   },
 
@@ -33,24 +33,53 @@ export const site = {
   featured: {
     label: 'Current project',
     name: 'Eighthundred',
-    status: 'Alpha · live',
+    status: 'Beta · live',
     url: 'https://eighthundred.site',
     host: 'eighthundred.site',
-    screenshot: {
-      src: 'assets/eighthundred-1000.webp',
-      src2x: 'assets/eighthundred-2000.webp',
-      width: 1000,
-      height: 632,
-      alt: 'Eighthundred home page: the headline “SAT Math you actually understand.” beside an interactive lab where you drag a parabola’s vertex.',
-    },
-    summary: 'A free SAT Math platform named after the perfect score. It teaches step by step, then works out why you got a question wrong and plans practice around it.',
-    plan: 'This year the club grows its original question bank, finishes the AI tutor with safety rules for under-18 users, tests it with students at school, and prepares a public beta.',
+    summary: 'A free SAT Math platform named after the perfect score. It teaches step by step, asks what went wrong after every miss, files the question in a Mistake Notebook, and brings it back until you solve it on your own.',
+    plan: 'Eighthundred is now in public beta (version 0.10). This year the club grows its original question bank, finishes the AI tutor with safety rules for under-18 users, and tests it with students at school.',
     stats: [
-      { n: '24', label: 'lessons', note: 'across 8 units, with interactive labs' },
-      { n: '266', label: 'questions', note: '96 written in-house, answers checked independently' },
-      { n: '72', label: 'generators', note: 'creating new questions without limit' },
-      { n: '35', label: 'minutes', note: 'Real Practice: 22 questions, module 2 adapts' },
+      { n: '24', label: 'lessons', note: 'in 8 units, each with an interactive lab' },
+      { n: '314', label: 'questions', note: 'each with a full worked solution' },
+      { n: '72', label: 'generators', note: 'making new-number versions of each skill' },
+      { n: '70', label: 'minutes', note: 'Real Practice: two adaptive modules of 22 questions' },
     ],
+    /** When the numbers above were last checked against eighthundred.site. */
+    statsNote: 'Counted on eighthundred.site on 3 October 2026.',
+
+    /**
+     * The live preview: one question from Eighthundred's homepage, with its real feedback.
+     * In question text, *x* is a math variable and {…} keeps a piece of math on one line.
+     */
+    preview: {
+      flag: 'This is a preview',
+      caption: 'One question from Eighthundred’s homepage, rebuilt here with its own design. Nothing you do here is saved.',
+      label: 'Try one. It takes 5 seconds.',
+      level: 'Lesson 1 · Easy',
+      question: 'If {4*x* − 7 = 21}, what is the value of {*x* − 2}?',
+      choices: ['1.5', '5', '7', '9'],
+      answer: 1,
+      right: '{*x* = 7}, so {*x* − 2 = 5}.',
+      wrong: {
+        0: { why: 'Subtracting 7 instead of adding it gives 4*x* = 14, so *x* = 3.5.', reason: 'slip', otto: 'Your method was fine. The sign flipped at the first step.' },
+        2: { why: '7 is the value of *x*. The question asks for {*x* − 2}.', reason: 'app', otto: 'You solved the equation, then answered a different question. It’s the most common miss on this one.' },
+        3: { why: '9 is {*x* + 2}. The question asks for {*x* − 2}.', reason: 'slip', otto: 'So close. The last step went the wrong way.' },
+      },
+      reasonPrompt: 'Why did it go wrong? Pick a Reason.',
+      reasons: [
+        { id: 'slip', name: 'I slipped', note: 'I knew how, made an error doing it' },
+        { id: 'concept', name: 'I didn’t know the idea', note: 'The method wasn’t there yet' },
+        { id: 'app', name: 'I didn’t see it was this idea', note: 'I know it, didn’t recognize it here' },
+      ],
+      otto: {
+        start: 'Pick an answer. I’ll tell you what happened.',
+        right: 'Right, and you read the question to the end. That’s half the battle on the SAT.',
+        agree: 'That’s my guess too. In the app this goes into your Mistake Notebook under “{reason}”, with the fix for it.',
+        differ: 'Noted. My guess was “{likely}”. In the app, one follow-up question would settle it, and the fix follows.',
+      },
+      more: 'Try more on eighthundred.site',
+      again: 'Try it again',
+    },
   },
 
   teamFilters: [
