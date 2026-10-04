@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Inkstep</title>
+<meta name="description" content="Inkstep is a student club that builds free learning tools, starting with Eighthundred, a free SAT Math platform.">
+<meta property="og:title" content="Inkstep">
+<meta property="og:description" content="A student club that builds free learning tools, one step at a time.">
+<meta property="og:url" content="https://inkstep.site/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F6F1E7">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,700;0,800;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one paper sheet; hero with live ink canvas, then a staircase of sections that climbs toward the orange dot. */
+:root{
+  --paper:#F6F1E7; --wash:#EDE5D6; --ink:#1C1B19; --muted:#5A554C; --line:#D8CFBF; --dot:#E2621B;
+  --blot:28,27,25;
+  --f-mark:'Caveat', 'Segoe Print', cursive;
+  --f-hand:'Patrick Hand', 'Segoe Print', cursive;
+  --f-body:'Be Vietnam Pro', 'Helvetica Neue', system-ui, sans-serif;
+  --f-mono:'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --gutter:clamp(16px, 5vw, 64px); --max:1120px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#161513; --wash:#201E1B; --ink:#EFE8DA; --muted:#A79F90; --line:#34312C; --dot:#F07A2E; --blot:239,232,218; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#161513; --wash:#201E1B; --ink:#EFE8DA; --muted:#A79F90; --line:#34312C; --dot:#F07A2E; --blot:239,232,218; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper); color:var(--ink); font-family:var(--f-body); font-size:17px; line-height:1.6; overflow-x:hidden}
+a{color:inherit}
+a:focus-visible, button:focus-visible{outline:2px solid var(--dot); outline-offset:3px; border-radius:4px}
+h1,h2,h3{text-wrap:balance; line-height:1.15; margin:0}
+p{margin:0}
+.wrap{max-width:var(--max); margin:0 auto; padding-inline:var(--gutter)}
+.label{font-family:var(--f-mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+.dot{display:inline-block; width:.22em; height:.22em; border-radius:50%; background:var(--dot); vertical-align:baseline}
+
+/* nav */
+.nav{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(6px); border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block:10px; flex-wrap:wrap}
+.nav-mark{font-family:var(--f-mark); font-weight:700; font-size:34px; line-height:1; text-decoration:none; letter-spacing:-.5px}
+.nav-links{display:flex; gap:clamp(12px,3vw,28px); flex-wrap:wrap; font-size:15px}
+.nav-links a{text-decoration:none; color:var(--muted); padding-block:10px}
+.nav-links a:hover{color:var(--ink)}
+
+/* hero */
+.hero{position:relative; overflow:hidden; border-bottom:1px solid var(--line)}
+#ink{position:absolute; inset:0; width:100%; height:100%; display:block}
+.hero .wrap{position:relative; padding-block:clamp(56px,10vw,120px) clamp(48px,8vw,96px); display:grid; gap:28px; pointer-events:none}
+.hero .wrap a{pointer-events:auto}
+.wordmark{display:flex; align-items:baseline; gap:.1em; padding-bottom:.08em; font-family:var(--f-mark); font-weight:700; font-size:clamp(96px,19vw,236px); line-height:.85; letter-spacing:-.02em}
+.wordmark .word{display:inline-block; animation:write 1.6s cubic-bezier(.6,.1,.3,1) both}
+.wordmark .dot{width:.13em; height:.13em; animation:drop .55s cubic-bezier(.3,1.6,.5,1) 2.25s both}
+.underline{width:min(64%,560px); height:auto; margin-top:-.4em; overflow:visible}
+.underline path{stroke:var(--ink); stroke-dasharray:640; stroke-dashoffset:0; animation:draw 1s ease-out 1.35s both}
+@keyframes write{from{clip-path:inset(-30% 100% -40% -10%)} to{clip-path:inset(-30% -15% -40% -10%)}}
+@keyframes draw{from{stroke-dashoffset:640} to{stroke-dashoffset:0}}
+@keyframes drop{0%{transform:translateY(-1.2em) scale(.4); opacity:0} 100%{transform:none; opacity:1}}
+.hero h1{font-size:clamp(26px,3.6vw,40px); font-weight:700; max-width:22ch}
+.hero .lede{max-width:56ch; color:var(--muted); font-size:clamp(17px,1.6vw,19px)}
+.slogan{font-family:var(--f-hand); font-size:clamp(24px,2.8vw,32px); line-height:1.1}
+.slogan small{display:block; font-family:var(--f-body); font-size:14px; color:var(--muted); font-style:italic}
+.ctas{display:flex; gap:14px; flex-wrap:wrap}
+.btn{display:inline-flex; align-items:center; gap:10px; min-height:48px; padding:0 22px; border-radius:999px; font-weight:600; font-size:15px; text-decoration:none; border:2px solid var(--ink); transition:background .2s, color .2s}
+.btn.solid{background:var(--ink); color:var(--paper)}
+.btn.solid:hover{background:transparent; color:var(--ink)}
+.btn.ghost:hover{background:var(--ink); color:var(--paper)}
+.hint{font-family:var(--f-hand); font-size:22px; color:var(--muted); transform:rotate(-2deg); justify-self:start}
+
+/* sections */
+section.block{padding-block:clamp(64px,9vw,112px); border-bottom:1px solid var(--line)}
+.head{display:grid; gap:14px; margin-bottom:clamp(32px,5vw,56px); max-width:62ch}
+.head h2{font-size:clamp(32px,4.4vw,52px); font-weight:800; letter-spacing:-.02em}
+
+/* mission */
+.mission{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(24px,4vw,56px)}
+.goal{display:grid; gap:12px; align-content:start}
+.goal h3{font-size:24px; font-weight:700}
+.goal p{color:var(--muted); max-width:46ch}
+.goal .stroke{height:14px; width:120px; overflow:visible}
+.goal .stroke path{stroke:var(--ink)}
+.promises{grid-column:1/-1; display:flex; flex-wrap:wrap; gap:10px 12px; padding-top:8px}
+.chip{border:1.5px solid var(--line); border-radius:999px; padding:6px 14px; font-size:14px}
+
+/* product */
+.product{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:clamp(28px,5vw,64px); align-items:start}
+.product .intro{display:grid; gap:18px}
+.product .intro h3{font-size:clamp(28px,3vw,36px); font-weight:800}
+.status{display:inline-flex; align-items:center; gap:8px; font-family:var(--f-mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; border:1.5px solid var(--ink); border-radius:999px; padding:4px 12px; justify-self:start}
+.status .dot{width:8px; height:8px; animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.facts{display:grid; gap:0; margin:0; padding:0; list-style:none; border-top:2px solid var(--ink)}
+.facts li{display:grid; grid-template-columns:7.5rem minmax(0,1fr); gap:16px; padding-block:16px; border-bottom:1px solid var(--line)}
+.facts .n{font-weight:800; font-size:26px; line-height:1.1; font-variant-numeric:tabular-nums}
+.facts .t{color:var(--muted); font-size:15px}
+
+/* staircase */
+.stairs{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); align-items:start; gap:0}
+.stair{position:relative; padding:18px 12px 0 14px; display:grid; gap:6px; align-content:start}
+.stair::before{content:""; position:absolute; left:0; top:0; height:2px; width:0; background:var(--ink); transition:width .5s ease-out}
+.stair::after{content:""; position:absolute; left:0; top:0; width:2px; height:0; background:var(--ink); transition:height .25s ease-out}
+.stairs.drawn .stair::before{width:100%}
+.stairs.drawn .stair::after{height:var(--rise)}
+.stair .k{font-family:var(--f-mono); font-size:12px; color:var(--muted)}
+.stair b{font-size:16px; line-height:1.25}
+.stair span.d{font-size:14px; color:var(--muted); line-height:1.45}
+.stair.check b::after{content:" ✓"; color:var(--muted)}
+.stairs-end{position:absolute; right:-6px; top:-10px; width:14px; height:14px; border-radius:50%; background:var(--dot); transform:scale(0); transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.stairs.drawn .stairs-end{transform:scale(1)}
+.cycle-note{margin-top:32px; color:var(--muted); max-width:62ch}
+
+/* teams */
+.teams{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; border-top:2px solid var(--ink)}
+.team{padding:24px 20px 28px 0; border-bottom:1px solid var(--line); display:grid; gap:8px; align-content:start}
+.team h3{font-size:20px; font-weight:700; display:inline}
+.team h3 span{background:linear-gradient(var(--ink),var(--ink)) no-repeat 0 100% / 0 2px; transition:background-size .35s ease}
+.team:hover h3 span{background-size:100% 2px}
+.team .vi{font-family:var(--f-hand); font-size:20px; color:var(--muted); line-height:1}
+.team p{color:var(--muted); font-size:15px; max-width:34ch}
+
+/* events */
+.events{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px}
+.event{position:relative; overflow:hidden; border:1.5px solid var(--line); border-radius:6px; padding:26px; display:grid; gap:10px; align-content:start; isolation:isolate}
+.event::before{content:""; position:absolute; z-index:-1; left:var(--mx,50%); top:var(--my,50%); width:10px; height:10px; border-radius:50%; background:var(--wash); transform:translate(-50%,-50%) scale(0); transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.event:hover::before{transform:translate(-50%,-50%) scale(90)}
+.event h3{font-size:24px; font-weight:800}
+.event .when{font-family:var(--f-mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+.event p{color:var(--muted); font-size:15px}
+.event .prize{font-size:14px; border-top:1px dashed var(--line); padding-top:10px}
+
+/* join */
+.join{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(28px,5vw,64px); align-items:start}
+.join .who{display:grid; gap:16px}
+.join .who p{color:var(--muted); max-width:46ch}
+.join .big{font-size:clamp(28px,3.4vw,40px); font-weight:800; line-height:1.15; color:var(--ink)}
+.path{list-style:none; margin:0; padding:0; display:grid; gap:0; counter-reset:p}
+.path li{position:relative; padding:0 0 26px 40px; counter-increment:p}
+.path li::before{content:counter(p); position:absolute; left:0; top:0; width:26px; height:26px; border-radius:50%; border:2px solid var(--ink); display:grid; place-items:center; font-family:var(--f-mono); font-size:12px; background:var(--paper)}
+.path li::after{content:""; position:absolute; left:12px; top:28px; bottom:2px; width:2px; background:var(--line)}
+.path li:last-child::after{display:none}
+.path b{display:block}
+.path span{color:var(--muted); font-size:15px}
+.apply{display:grid; gap:12px; margin-top:8px; justify-items:start}
+.apply .soon{font-family:var(--f-hand); font-size:22px; color:var(--muted); transform:rotate(-1.5deg)}
+
+/* footer */
+footer{padding-block:56px 72px}
+footer .wrap{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap}
+footer .fm{font-family:var(--f-mark); font-weight:700; font-size:64px; line-height:.9}
+footer .fm .dot{width:.13em; height:.13em}
+footer p{color:var(--muted); font-size:14px}
+
+@media (max-width:900px){
+  .stairs{grid-template-columns:1fr; gap:0}
+  .stair{margin-top:0 !important; padding:14px 0 18px 22px}
+  .stair::before{display:none}
+  .stair::after{height:100% !important; transition:none}
+  .stairs-end{left:-6px; right:auto; top:auto; bottom:-6px}
+  .teams{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:720px){
+  .mission,.product,.join,.events,.teams{grid-template-columns:1fr}
+  .facts li{grid-template-columns:5.5rem minmax(0,1fr)}
+  .hint{display:none}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important}
+  .stairs .stair::before{width:100%} .stairs .stair::after{height:var(--rise)} .stairs-end{transform:scale(1)}
+}
+
+/* ---------- Otto, Eighthundred's AI tutor ---------- */
+.otto-card{display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:center;border:1.5px solid var(--line);border-radius:18px;padding:16px 18px;background:var(--wash)}
+.otto-card h4{margin:0 0 6px;font-family:var(--f-body);font-size:17px;font-weight:800}
+.otto-card h4 small{font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-left:8px}
+.otto-card p{margin:0;font-size:15px;line-height:1.55;color:var(--muted)}
+.otto{display:block;width:96px;height:106px;overflow:visible}
+.otto *{transform-box:view-box}
+.otto .o-line{fill:none;stroke:var(--ink);stroke-width:6;stroke-linecap:round}
+.otto .o-shape{fill:var(--paper);stroke:var(--ink);stroke-width:6}
+.otto .o-eye{fill:var(--ink)} .otto .o-shine{fill:var(--paper)} .otto .o-cheek{fill:#F2A49A;opacity:.55}
+.otto .o-mouth{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.otto .o-dot{fill:#C4513A}
+.otto .o-body{transform-origin:60px 120px;animation:oBreathe 3.2s ease-in-out infinite}
+.otto .o-eyes{transform-origin:60px 50px;animation:oBlink 4.6s infinite}
+.otto .o-dot{animation:oBob 2.6s ease-in-out infinite}
+.otto .o-arm-r{transform-origin:86px 90px}
+.otto.waving .o-arm-r{animation:oWave .45s ease-in-out 4 alternate}
+@keyframes oBreathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.015,1.035)}}
+@keyframes oBlink{0%,90%,100%{transform:scaleY(1)}93%{transform:scaleY(.1)}96%{transform:scaleY(1)}}
+@keyframes oBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes oWave{from{transform:rotate(-8deg)}to{transform:rotate(-55deg)}}
+@media (prefers-reduced-motion: reduce){.otto *{animation:none!important}}
+@media (max-width:520px){.otto-card{grid-template-columns:72px 1fr}.otto{width:72px;height:80px}}
+</style>
+<style>html{-webkit-text-size-adjust:100%} body{margin:0} img{max-width:100%}</style>
+</head>
+<body>
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="nav-mark" href="#top">inkstep<span class="dot"></span></a>
+    <div class="nav-links">
+      <a href="#why">Why</a><a href="#build">What we build</a><a href="#how">How we work</a><a href="#events">Events</a><a href="#join">Join</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="ink" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <div class="wordmark" aria-label="inkstep"><span class="word">inkstep</span><span class="dot"></span></div>
+      <svg class="underline" viewBox="0 0 560 64" fill="none" aria-hidden="true"><path d="M6 54 Q90 52 176 51 L182 35 Q270 33 356 33 L362 17 Q450 15 548 14" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h1>A student club that builds free learning tools, one step at a time.</h1>
+    <p class="lede">We design, write, code and launch study tools that students actually use. Our first one, Eighthundred, already helps students practise SAT Math for free.</p>
+    <p class="slogan">Từng nét mực, từng bước tiến.<small>Every stroke of ink, every step forward.</small></p>
+    <div class="ctas">
+      <a class="btn solid" href="https://eighthundred.site" target="_blank" rel="noopener">Try Eighthundred</a>
+      <a class="btn ghost" href="#join">Join the club</a>
+    </div>
+    <p class="hint">← move or tap to spill some ink</p>
+  </div>
+</header>
+
+<main>
+  <section class="block" id="why">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">Why we exist</p>
+        <h2>Two goals, one product at a time.</h2>
+      </div>
+      <div class="mission">
+        <div class="goal">
+          <svg class="stroke" viewBox="0 0 120 14" fill="none" aria-hidden="true"><path d="M3 10 Q40 9 58 9 L61 4 Q90 3 117 3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Free tools that students can trust</h3>
+          <p>Good test prep is often expensive or locked behind ads. We build high-quality study tools that cost nothing, with content we write and check ourselves.</p>
+        </div>
+        <div class="goal">
+          <svg class="stroke" viewBox="0 0 120 14" fill="none" aria-hidden="true"><path d="M3 10 Q40 9 58 9 L61 4 Q90 3 117 3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Real skills from real work</h3>
+          <p>Members learn coding, design, writing, marketing and outreach by working on a product with real users. They leave with something they built, not just a certificate.</p>
+        </div>
+        <div class="promises" aria-label="Our promises">
+          <span class="chip">Free, no ads</span>
+          <span class="chip">Every new question is original</span>
+          <span class="chip">We only collect what's needed to save progress</span>
+          <span class="chip">Every contribution is credited by name</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="build">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">What we build</p>
+        <h2>We start from a working product.</h2>
+      </div>
+      <div class="product">
+        <div class="intro">
+          <span class="status"><span class="dot"></span>Alpha · live now</span>
+          <h3>Eighthundred</h3>
+          <p>A free SAT Math platform named after the perfect score. It teaches step by step, then diagnoses why you got a question wrong and plans practice around it.</p>
+          <p>This year the club will grow its original question bank, roll out Otto, the AI tutor, to every student with safety rules for under-18 users, test it with students at school, and prepare a public beta.</p>
+          <div class="otto-card">
+            <svg class="otto" viewBox="0 0 120 132" role="img" aria-label="Otto, Eighthundred’s mascot"><g class="o-arm-l"><path class="o-line" d="M36 92 Q24 92 17 83"/></g><g class="o-arm-r"><path class="o-line" d="M84 92 Q96 92 103 83"/></g><g class="o-body"><ellipse class="o-shape" cx="60" cy="97" rx="28" ry="24"/><ellipse class="o-shape" cx="60" cy="52" rx="23" ry="21"/><ellipse class="o-cheek" cx="44" cy="58" rx="4.2" ry="2.6"/><ellipse class="o-cheek" cx="76" cy="58" rx="4.2" ry="2.6"/><g class="o-eyes"><ellipse class="o-eye" cx="52" cy="50" rx="3.4" ry="4.4"/><ellipse class="o-eye" cx="68" cy="50" rx="3.4" ry="4.4"/><circle class="o-shine" cx="53.2" cy="48.4" r="1.2"/><circle class="o-shine" cx="69.2" cy="48.4" r="1.2"/></g><path class="o-mouth" d="M55 59 Q60 63.5 65 59"/></g><circle class="o-dot" cx="60" cy="17" r="6.5"/></svg>
+            <div><h4>Meet Otto <small>New · alpha</small></h4><p>Eighthundred’s AI tutor sits beside every question. He sees what you answered, gives hints before answers, names the kind of mistake you made, and can set up a similar question in one tap — in English or Vietnamese.</p></div>
+          </div>
+          <a class="btn ghost" href="https://eighthundred.site" target="_blank" rel="noopener">eighthundred.site</a>
+        </div>
+        <ul class="facts">
+          <li><span class="n">24</span><span class="t">lessons across 8 units, covering all four SAT Math areas, each with an interactive lab and step-by-step solutions</span></li>
+          <li><span class="n">266</span><span class="t">written questions, plus 72 generators that create new questions without limit</span></li>
+          <li><span class="n">22</span><span class="t">questions in Real Practice, a two-module Digital SAT-style test in 35 minutes where module 2 adapts to how you did in module 1</span></li>
+          <li><span class="n">3</span><span class="t">mistake types Eighthundred tells apart: a slip, a concept gap, or not recognising the question type</span></li>
+          <li><span class="n">30</span><span class="t">free messages a day with Otto, the AI tutor, for every signed-in student</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="how">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">How we work</p>
+        <h2>Every two weeks, we climb one step.</h2>
+        <p style="color:var(--muted)">Each cycle ends with at least one change shipped to eighthundred.site.</p>
+      </div>
+      <ol class="stairs" id="stairs">
+        <li class="stair" style="margin-top:144px; --rise:24px"><span class="k">01</span><b>Pick a goal</b><span class="d">The team agrees on one thing to ship.</span></li>
+        <li class="stair" style="margin-top:120px; --rise:24px"><span class="k">02</span><b>Design</b><span class="d">Screens, flows and visuals.</span></li>
+        <li class="stair" style="margin-top:96px; --rise:24px"><span class="k">03</span><b>Build</b><span class="d">Write the content and the code.</span></li>
+        <li class="stair check" style="margin-top:72px; --rise:24px"><span class="k">04</span><b>Content check</b><span class="d">Two members solve every question on their own.</span></li>
+        <li class="stair check" style="margin-top:48px; --rise:24px"><span class="k">05</span><b>Tech check</b><span class="d">Test before anything goes live.</span></li>
+        <li class="stair" style="margin-top:24px; --rise:24px"><span class="k">06</span><b>Ship</b><span class="d">Release it to real students.</span></li>
+        <li class="stair" style="margin-top:0; --rise:24px"><span class="k">07</span><b>Listen</b><span class="d">Collect feedback for the next cycle.</span><span class="stairs-end" aria-hidden="true"></span></li>
+      </ol>
+      <p class="cycle-note">Steps 4 and 5 are our two safety nets. Content that isn't right goes back to the Content team, and bugs go back to Developers, before anything is released.</p>
+    </div>
+  </section>
+
+  <section class="block" id="teams">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">Six teams</p>
+        <h2>Like a small startup, run by students.</h2>
+      </div>
+      <div class="teams">
+        <div class="team"><span class="vi">Ban Chuyên môn</span><h3><span>Content</span></h3><p>Writes lessons and original questions, solves them independently, and approves everything before release.</p></div>
+        <div class="team"><span class="vi">Ban Developer</span><h3><span>Developers</span></h3><p>Builds new features, fixes bugs, looks after accounts and the database, and tests every release.</p></div>
+        <div class="team"><span class="vi">Ban Thiết kế</span><h3><span>Design</span></h3><p>Designs screens, icons, images and video, and keeps the product and the club looking like one brand.</p></div>
+        <div class="team"><span class="vi">Ban Marketing</span><h3><span>Marketing</span></h3><p>Brings the product to students through TikTok, Facebook and Instagram, and measures what works.</p></div>
+        <div class="team"><span class="vi">Ban PR – Đối ngoại</span><h3><span>PR &amp; Partnerships</span></h3><p>Builds trust with the school, teachers, other clubs and sponsors, and handles the club's emails.</p></div>
+        <div class="team"><span class="vi">Ban Nhân sự – Hậu cần</span><h3><span>People &amp; Logistics</span></h3><p>Recruits and trains members, tracks contributions, and prepares rooms and supplies for events.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="events">
+    <div class="wrap">
+      <div class="head">
+        <p class="label">Every school year</p>
+        <h2>Four events, two open to the whole school.</h2>
+      </div>
+      <div class="events">
+        <article class="event"><span class="when">Semester 1 · competition</span><h3>Question Jam</h3><p>Write an original SAT Math question on a set theme. Judged on accuracy, originality and the quality of the solution.</p><p class="prize">The best questions go live on Eighthundred with the author's name.</p></article>
+        <article class="event"><span class="when">Before each SAT date</span><h3>SAT Math Week</h3><p>A week of practice on Eighthundred: a daily challenge, one Real Practice mock test, and a class leaderboard.</p><p class="prize">Prizes for the most improved student and class.</p></article>
+        <article class="event"><span class="when">End of each semester · showcase</span><h3>Ink &amp; Code Day</h3><p>Each team shows what it built. Students and teachers try it and give feedback on the spot.</p><p class="prize">No prizes. Every team gets written feedback.</p></article>
+        <article class="event"><span class="when">Semester 2 · competition</span><h3>Hackathon 800</h3><p>Teams of 3–5 get one day to build a small study tool for any subject.</p><p class="prize">The best idea may become the club's next project.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="join">
+    <div class="wrap">
+      <div class="join">
+        <div class="who">
+          <p class="label">Join Inkstep</p>
+          <p class="big">No experience needed. About 3 hours a week.</p>
+          <p>We recruit Vinschool Smart City students from grades 9 to 12 who want to work on a real product, learn new skills, and own their mistakes when they find them.</p>
+        </div>
+        <div>
+          <ol class="path">
+            <li><b>Apply</b><span>Fill in a short form and pick a team.</span></li>
+            <li><b>Try a small task</b><span>For example, write one SAT question or redesign one screen.</span></li>
+            <li><b>Chat for 10 minutes</b><span>Meet the team lead.</span></li>
+            <li><b>Two-week trial</b><span>Work through one real cycle with us.</span></li>
+          </ol>
+          <div class="apply">
+            <span class="btn solid" style="opacity:.55; cursor:default">Application form [link coming]</span>
+            <span class="soon">applications open soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="fm">inkstep<span class="dot"></span></div>
+      <p>Câu lạc bộ Phát triển Sản phẩm Học tập</p>
+    </div>
+    <p>Building <a href="https://eighthundred.site" target="_blank" rel="noopener">eighthundred.site</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- ink canvas ---------- */
+  var cv = document.getElementById('ink'), hero = document.querySelector('.hero');
+  var ctx = cv.getContext('2d'), dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var blots = [], rgb = '28,27,25', W = 0, H = 0;
+  function readColor(){ rgb = getComputedStyle(document.documentElement).getPropertyValue('--blot').trim() || rgb; }
+  function size(){
+    var r = hero.getBoundingClientRect(); W = r.width; H = r.height;
+    cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function blot(x, y, big){
+    var n = big ? 3 : 1;
+    for (var i = 0; i < n; i++){
+      blots.push({x: x + (Math.random()-.5)*(big?30:6), y: y + (Math.random()-.5)*(big?30:6), r: 1,
+        target: big ? 40 + Math.random()*70 : 6 + Math.random()*18,
+        seed: Math.random()*1000, a: big ? .07 : .05, life: 0});
+    }
+  }
+  function shape(b){
+    var pts = 40; ctx.beginPath();
+    for (var i = 0; i <= pts; i++){
+      var t = i / pts * Math.PI * 2;
+      var wob = 1 + .14*Math.sin(t*3 + b.seed) + .09*Math.sin(t*7 + b.seed*1.7) + .05*Math.sin(t*13 + b.seed*.3);
+      var rr = b.r * wob, px = b.x + Math.cos(t)*rr, py = b.y + Math.sin(t)*rr;
+      i ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+    }
+    ctx.closePath();
+  }
+  function frame(){
+    // slowly let the paper reclaim the ink
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = 'rgba(0,0,0,0.012)'; ctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation = 'source-over';
+    for (var i = blots.length - 1; i >= 0; i--){
+      var b = blots[i];
+      b.r += (b.target - b.r) * .06; b.life++;
+      ctx.fillStyle = 'rgba(' + rgb + ',' + (b.a * (1 - b.life/90)) + ')';
+      shape(b); ctx.fill();
+      if (b.life > 90) blots.splice(i, 1);
+    }
+    requestAnimationFrame(frame);
+  }
+  function staticInk(){
+    // reduced motion: a few still blots, drawn once
+    for (var k = 0; k < 5; k++){
+      var b = {x: W*(.55 + Math.random()*.4), y: H*(.15 + Math.random()*.7), r: 30 + Math.random()*60, seed: Math.random()*1000};
+      for (var j = 0; j < 4; j++){ ctx.fillStyle = 'rgba(' + rgb + ',0.035)'; b.r *= .85; shape(b); ctx.fill(); }
+    }
+  }
+  var last = null;
+  function pos(e){ var r = cv.getBoundingClientRect(); return {x: e.clientX - r.left, y: e.clientY - r.top}; }
+  hero.addEventListener('pointermove', function(e){
+    if (reduce) return;
+    var p = pos(e);
+    if (!last || Math.hypot(p.x-last.x, p.y-last.y) > 26){ blot(p.x, p.y, false); last = p; }
+  });
+  hero.addEventListener('pointerdown', function(e){ if (reduce) return; var p = pos(e); blot(p.x, p.y, true); });
+  window.addEventListener('resize', function(){ size(); if (reduce) staticInk(); });
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  if (mq.addEventListener) mq.addEventListener('change', readColor);
+  new MutationObserver(readColor).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+  readColor(); size();
+  if (reduce){ staticInk(); }
+  else {
+    requestAnimationFrame(frame);
+    // a few opening drops so the page feels alive
+    [[.72,.3,600],[.86,.62,1100],[.62,.78,1600],[.92,.2,2300]].forEach(function(d){
+      setTimeout(function(){ blot(W*d[0], H*d[1], true); }, d[2]);
+    });
+  }
+
+  /* ---------- staircase draws when it comes into view ---------- */
+  var stairs = document.getElementById('stairs');
+  if (reduce || !('IntersectionObserver' in window)) { stairs.classList.add('drawn'); }
+  else {
+    var items = stairs.querySelectorAll('.stair');
+    var sheet = document.createElement('style');
+    var rules = '';
+    items.forEach(function(el, i){
+      rules += '.stairs.drawn .stair:nth-child(' + (i+1) + ')::after{transition-delay:' + (i*.3) + 's}' +
+               '.stairs.drawn .stair:nth-child(' + (i+1) + ')::before{transition-delay:' + (i*.3 + .2) + 's}';
+    });
+    rules += '.stairs.drawn .stairs-end{transition-delay:' + (items.length*.3 + .3) + 's}';
+    sheet.textContent = rules; document.head.appendChild(sheet);
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ stairs.classList.add('drawn'); io.disconnect(); } });
+    }, {threshold:.35});
+    io.observe(stairs);
+  }
+
+  /* ---------- event cards: ink spreads from the cursor ---------- */
+  document.querySelectorAll('.event').forEach(function(card){
+    card.addEventListener('pointerenter', function(e){
+      var r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){ var o=document.querySelector('.otto'); if(!o||!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ o.classList.add('waving'); setTimeout(function(){ o.classList.remove('waving'); },2000); io.disconnect(); } }); },{threshold:.6}); io.observe(o); })();
+</script>
+</body>
+</html>
